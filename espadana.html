@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="اسپادانا انرژی - برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ۱۰ سال سابقه. طراحی و نصب پنل خورشیدی برای منازل مسکونی، تجاری و صنعتی.">
+<meta name="keywords" content="پنل خورشیدی، انرژی خورشیدی، سازه خورشیدی، برق خورشیدی، نصب پنل خورشیدی، ایران، اسپادانا">
+<title>اسپادانا | برترین سازه مهندسی خورشیدی ایران</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sun: #F59E0B;
+    --sun-deep: #D97706;
+    --sky: #060E1A;
+    --sky-mid: #0D1F35;
+    --sky-panel: #0A1628;
+    --panel-line: rgba(245,158,11,0.08);
+    --green: #10B981;
+    --green-neon: #00FF88;
+    --green-neon-deep: #00D470;
+    --green-light: #D1FAE5;
+    --white: #FFFFFF;
+    --gray-50: #0D1628;
+    --gray-100: #111E30;
+    --gray-200: #1A2D46;
+    --gray-600: #8AA4C0;
+    --gray-800: #1E293B;
+    --text: #E8F0FA;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--sky);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* SOLAR PANEL GRID TEXTURE */
+  .panel-bg {
+    background-color: var(--sky-panel);
+    background-image:
+      linear-gradient(var(--panel-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--panel-line) 1px, transparent 1px),
+      linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: #020810;
+    color: var(--sun);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 100;
+    border-bottom: 1px solid rgba(245,158,11,0.2);
+  }
+  .ticker-label {
+    display: inline-block;
+    background: var(--sun);
+    color: var(--sky);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 14px;
+    margin-left: 16px;
+    vertical-align: middle;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  .ticker-content {
+    display: inline-block;
+    animation: ticker 55s linear infinite;
+    font-size: 14px;
+    font-weight: 500;
+    padding-right: 200px;
+  }
+  .ticker-content a { color: var(--sun); text-decoration: underline; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .ticker-content:hover { animation-play-state: paused; }
+
+  /* NAV */
+  nav {
+    background: rgba(6,14,26,0.95);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    border-bottom: 1px solid rgba(245,158,11,0.15);
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: var(--sun);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .logo-text {
+    color: var(--white);
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .logo-text span { color: var(--sun); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(232,240,250,0.7);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sun); }
+  .nav-cta {
+    background: var(--sun);
+    color: var(--sky) !important;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    font-weight: 700 !important;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #020810 0%, #081525 60%, #060E1A 100%);
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; right: -50px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,255,136,0.07) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  /* Solar panel grid overlay on hero */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.35);
+    color: var(--sun);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  .hero h1 .highlight { color: var(--sun); }
+  .hero p {
+    font-size: 18px;
+    color: rgba(232,240,250,0.7);
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--sun);
+    color: var(--sky);
+    padding: 14px 32px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-primary:hover { background: var(--sun-deep); transform: translateY(-1px); }
+  .btn-outline {
+    border: 2px solid rgba(232,240,250,0.25);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--sun); background: rgba(245,158,11,0.08); }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(245,158,11,0.15);
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 900; color: var(--sun); display: block; }
+  .stat-label { font-size: 13px; color: rgba(232,240,250,0.5); margin-top: 4px; }
+
+  /* SECTIONS */
+  section { padding: 80px 5%; }
+  .section-tag {
+    display: inline-block;
+    background: rgba(0,255,136,0.1);
+    color: var(--green-neon);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(0,255,136,0.2);
+  }
+  h2.section-title {
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  .section-subtitle {
+    font-size: 17px;
+    color: var(--gray-600);
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .centered { text-align: center; }
+  .centered .section-subtitle { margin: 0 auto 48px; }
+
+  /* WHY US */
+  .why-section { background: var(--sky-panel); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .why-card {
+    background: rgba(13,31,53,0.8);
+    border: 1px solid rgba(245,158,11,0.12);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+  .why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.3);
+  }
+  .why-icon {
+    width: 52px; height: 52px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  .why-card h3 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .why-card p { font-size: 15px; color: var(--gray-600); line-height: 1.7; }
+
+  /* HOW IT WORKS */
+  .how-section { background: #020810; border-top: 1px solid rgba(245,158,11,0.1); border-bottom: 1px solid rgba(245,158,11,0.1); }
+  .how-section .section-title { color: var(--white); }
+  .how-section .section-subtitle { color: rgba(232,240,250,0.55); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0;
+    position: relative;
+    margin-top: 48px;
+  }
+  .step { text-align: center; padding: 32px 24px; position: relative; }
+  .step:not(:last-child)::after {
+    content: '←';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    color: var(--sun);
+    font-size: 24px;
+  }
+  .step-num {
+    width: 56px; height: 56px;
+    background: var(--sun);
+    color: var(--sky);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 900;
+    margin: 0 auto 16px;
+  }
+  .step h3 { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .step p { font-size: 14px; color: rgba(232,240,250,0.55); }
+
+  /* BENEFITS */
+  .benefits-section { background: var(--sky-panel); }
+  .benefits-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .benefit-list { list-style: none; }
+  .benefit-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(245,158,11,0.1);
+  }
+  .benefit-list li:last-child { border-bottom: none; }
+  .check {
+    width: 28px; height: 28px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 14px;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .benefit-text h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .benefit-text p { font-size: 14px; color: var(--gray-600); }
+  .savings-card {
+    background: #020810;
+    border: 1px solid rgba(245,158,11,0.15);
+    border-radius: var(--radius);
+    padding: 36px;
+    color: var(--white);
+  }
+  .savings-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 24px; color: var(--sun); }
+  .savings-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 15px;
+    color: var(--gray-600);
+  }
+  .savings-row:last-child { border-bottom: none; }
+  .savings-row .val { font-weight: 700; color: var(--sun); font-size: 18px; }
+  .savings-cta {
+    margin-top: 24px;
+    background: var(--sun);
+    color: var(--sky);
+    text-align: center;
+    padding: 14px;
+    border-radius: var(--radius-sm);
+    font-weight: 700; font-size: 16px;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+  .savings-cta:hover { background: var(--sun-deep); }
+
+  /* PRODUCTS */
+  .products-section { background: #060E1A; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .product-card {
+    background: var(--sky-panel);
+    border: 1px solid rgba(245,158,11,0.12);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 20px rgba(245,158,11,0.06);
+  }
+  .product-img {
+    height: 180px;
+    background: linear-gradient(135deg, #0D1F35 0%, #020810 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 60px;
+    border-bottom: 1px solid rgba(245,158,11,0.1);
+  }
+  .product-body { padding: 24px; }
+  .product-badge {
+    display: inline-block;
+    background: rgba(245,158,11,0.1);
+    color: var(--sun);
+    font-size: 12px; font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(245,158,11,0.2);
+  }
+  .product-body h3 { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .product-body p { font-size: 14px; color: var(--gray-600); margin-bottom: 16px; }
+  .product-link {
+    color: var(--sun);
+    font-weight: 700; font-size: 14px;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .product-link:hover { text-decoration: underline; }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--sky-panel); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .testimonial {
+    background: #060E1A;
+    border: 1px solid rgba(245,158,11,0.12);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+  .stars { color: var(--sun); font-size: 18px; margin-bottom: 12px; }
+  .testimonial p { font-size: 15px; color: var(--gray-600); line-height: 1.8; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 44px; height: 44px;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--sun); font-weight: 700; font-size: 16px;
+  }
+  .author-info h4 { font-size: 15px; font-weight: 700; color: var(--white); }
+  .author-info p { font-size: 13px; color: var(--gray-600); }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #D97706 100%);
+    text-align: center;
+    padding: 80px 5%;
+  }
+  .cta-section h2 { font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: var(--sky); margin-bottom: 16px; }
+  .cta-section p { font-size: 18px; color: rgba(6,14,26,0.75); margin-bottom: 36px; }
+  .cta-phones {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center; margin-bottom: 24px;
+  }
+  .cta-phone {
+    background: var(--sky);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 17px; font-weight: 700;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    direction: ltr;
+    transition: background 0.2s;
+  }
+  .cta-phone:hover { background: #0D1F35; }
+
+  /* FAQ */
+  .faq-section { background: #060E1A; }
+  .faq-list { max-width: 760px; margin: 48px auto 0; }
+  .faq-item { border-bottom: 1px solid rgba(245,158,11,0.1); }
+  .faq-q {
+    width: 100%; background: none; border: none;
+    text-align: right;
+    padding: 20px 0;
+    font-size: 17px; font-weight: 700;
+    color: var(--white);
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Vazirmatn', sans-serif;
+  }
+  .faq-q:hover { color: var(--sun); }
+  .faq-q .arrow { transition: transform 0.3s; font-size: 20px; color: var(--sun); }
+  .faq-q.open .arrow { transform: rotate(90deg); }
+  .faq-a {
+    display: none; padding: 0 0 20px;
+    font-size: 15px; color: var(--gray-600); line-height: 1.8;
+  }
+  .faq-a.open { display: block; }
+
+  /* ========== CONTACT FORM - NEW MODAL STYLE ========== */
+  .contact-section { background: var(--sky-panel); }
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .contact-info h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 20px; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+  .contact-detail-icon {
+    width: 40px; height: 40px;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.2);
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .contact-detail-body h4 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .contact-detail-body p, .contact-detail-body a {
+    font-size: 15px; color: var(--gray-600);
+    text-decoration: none; line-height: 1.7;
+    display: block; direction: ltr; text-align: right;
+  }
+  .contact-detail-body a:hover { color: var(--sun); }
+
+  /* NEW FORM */
+  .contact-form {
+    background: #020810;
+    border: 1px solid rgba(0,255,136,0.15);
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: 0 0 40px rgba(0,255,136,0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-form::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--green-neon), var(--sun), var(--green-neon));
+  }
+  .contact-form h3 {
+    font-size: 20px; font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .contact-form .form-subtitle {
+    font-size: 14px; color: var(--gray-600);
+    margin-bottom: 28px; line-height: 1.6;
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block; font-size: 14px; font-weight: 700;
+    color: rgba(232,240,250,0.8); margin-bottom: 8px;
+  }
+  .form-group label span { color: var(--green-neon); }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid rgba(245,158,11,0.15);
+    border-radius: var(--radius-sm);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 15px;
+    color: var(--white);
+    background: rgba(13,31,53,0.6);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder {
+    color: rgba(138,164,192,0.5);
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--green-neon);
+    box-shadow: 0 0 0 3px rgba(0,255,136,0.08);
+    background: rgba(13,31,53,0.9);
+  }
+  .form-group select option { background: #0D1F35; color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  
+  /* GREEN NEON SUBMIT BUTTON */
+  .form-submit {
+    width: 100%;
+    background: var(--green-neon);
+    color: #020810;
+    border: none;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    font-size: 17px; font-weight: 900;
+    font-family: 'Vazirmatn', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 8px;
+    box-shadow: 0 0 20px rgba(0,255,136,0.3), 0 4px 15px rgba(0,212,112,0.2);
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+  }
+  .form-submit::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -60%;
+    width: 40%; height: 200%;
+    background: rgba(255,255,255,0.2);
+    transform: skewX(-20deg);
+    transition: left 0.4s;
+  }
+  .form-submit:hover {
+    background: var(--green-neon-deep);
+    box-shadow: 0 0 32px rgba(0,255,136,0.5), 0 4px 20px rgba(0,212,112,0.4);
+    transform: translateY(-1px);
+  }
+  .form-submit:hover::after { left: 120%; }
+  .form-submit:active { transform: translateY(0); }
+
+  /* SUCCESS MESSAGE */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 32px 24px;
+  }
+  .success-msg.show { display: block; }
+  .success-icon {
+    width: 72px; height: 72px;
+    background: rgba(0,255,136,0.1);
+    border: 2px solid var(--green-neon);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    margin: 0 auto 20px;
+    animation: pulse-green 2s ease-in-out infinite;
+  }
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,255,136,0.3); }
+    50% { box-shadow: 0 0 0 12px rgba(0,255,136,0); }
+  }
+  .success-msg h3 { font-size: 22px; font-weight: 900; color: var(--green-neon); margin-bottom: 12px; }
+  .success-msg p { font-size: 15px; color: var(--gray-600); line-height: 1.8; }
+  .success-msg p strong { color: var(--white); }
+
+  /* CALCULATOR */
+  .calc-section { background: #020810; }
+  .calc-box {
+    max-width: 700px;
+    margin: 48px auto 0;
+    background: var(--sky-panel);
+    border: 1px solid rgba(245,158,11,0.12);
+    border-radius: var(--radius);
+    padding: 40px;
+  }
+  .calc-row { margin-bottom: 24px; }
+  .calc-row label { display: block; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+  .calc-row input[type=range] { width: 100%; accent-color: var(--sun); }
+  .calc-row .val-display {
+    display: flex; justify-content: space-between;
+    font-size: 13px; color: var(--gray-600); margin-top: 4px;
+  }
+  .calc-row .current-val {
+    font-size: 20px; font-weight: 700; color: var(--sun);
+    text-align: center; display: block; margin-bottom: 4px;
+  }
+  .calc-results {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; margin-top: 32px;
+  }
+  .calc-result-card {
+    background: #020810;
+    border: 1px solid rgba(245,158,11,0.15);
+    border-radius: var(--radius-sm);
+    padding: 20px; text-align: center;
+  }
+  .calc-result-card .label { font-size: 12px; color: var(--gray-600); margin-bottom: 8px; display: block; }
+  .calc-result-card .value { font-size: 22px; font-weight: 900; color: var(--sun); }
+  .calc-result-card .unit { font-size: 12px; color: rgba(232,240,250,0.4); margin-top: 4px; display: block; }
+
+  /* FOOTER */
+  footer { background: #020810; color: rgba(232,240,250,0.6); padding: 56px 5% 0; border-top: 1px solid rgba(245,158,11,0.1); }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand p { font-size: 14px; line-height: 1.8; margin-top: 16px; }
+  .footer-col h4 { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { color: rgba(232,240,250,0.55); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--sun); }
+  .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 14px; }
+  .footer-contact-item span:first-child { color: var(--sun); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .footer-contact-item a { color: rgba(232,240,250,0.6); text-decoration: none; direction: ltr; display: block; }
+  .footer-contact-item a:hover { color: var(--sun); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; font-size: 13px; flex-wrap: wrap; gap: 8px;
+  }
+  .footer-bottom a { color: var(--sun); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .benefits-layout, .contact-layout { grid-template-columns: 1fr; gap: 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .calc-results { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .step:not(:last-child)::after { display: none; }
+    .hero-stats { gap: 24px; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap" role="marquee" aria-label="اخبار مهم">
+  <span class="ticker-label">🔴 اخبار ویژه</span>
+  <span class="ticker-content">
+    ⚡ طراحی مهندسی و اقتصادی متناسب با نیاز مصرف واقعی &nbsp;|&nbsp; برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ده سال سابقه درخشان &nbsp;|&nbsp; توان تولید روزانه یک مگاوات سازه خورشیدی سفارشی &nbsp;|&nbsp; ☀️ کار خاص مهندسی را از ما بخواهید &nbsp;|&nbsp; تماس: <a href="tel:09122504115">09122504115</a> &nbsp; <a href="tel:09122400138">09122400138</a> &nbsp; <a href="tel:02182809833">02182809833</a> &nbsp;|&nbsp; <a href="https://ble.ir/ESPADANACO" target="_blank">ble.ir/ESPADANACO</a> &nbsp;|&nbsp; 🌞 برای روزهای بی‌برقی تابستان ۱۴۰۵ آماده هستید؟ &nbsp;|&nbsp; بدون اشغال پشت‌بام برق مصرفی خود را تولید کنید، با امکان فروش به شبکه توزیع برق &nbsp;|&nbsp; ارسال سراسر کشور &nbsp;|&nbsp;
+    ⚡ طراحی مهندسی و اقتصادی متناسب با نیاز مصرف واقعی &nbsp;|&nbsp; برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ده سال سابقه درخشان &nbsp;|&nbsp; توان تولید روزانه یک مگاوات سازه خورشیدی سفارشی &nbsp;|&nbsp; ☀️ کار خاص مهندسی را از ما بخواهید &nbsp;|&nbsp; تماس: <a href="tel:09122504115">09122504115</a> &nbsp; <a href="tel:09122400138">09122400138</a> &nbsp; <a href="tel:02182809833">02182809833</a> &nbsp;|&nbsp; <a href="https://ble.ir/ESPADANACO" target="_blank">ble.ir/ESPADANACO</a> &nbsp;|&nbsp; 🌞 برای روزهای بی‌برقی تابستان ۱۴۰۵ آماده هستید؟ &nbsp;|&nbsp; بدون اشغال پشت‌بام برق مصرفی خود را تولید کنید، با امکان فروش به شبکه توزیع برق &nbsp;|&nbsp; ارسال سراسر کشور &nbsp;|&nbsp;
+  </span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">☀️</div>
+    <div class="logo-text">اسپا<span>دانا</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">چرا ما؟</a></li>
+    <li><a href="#products">محصولات</a></li>
+    <li><a href="#calculator">محاسبه صرفه‌جویی</a></li>
+    <li><a href="#faq">سؤالات</a></li>
+    <li><a href="#contact" class="nav-cta">تماس با ما</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span>☀️</span>
+      <span>برترین سازه مهندسی خورشیدی ایران</span>
+    </div>
+    <h1>
+      بدون اشغال پشت‌بام،<br>
+      <span class="highlight">برق مصرفی‌تان</span><br>
+      را خودتان تولید کنید
+    </h1>
+    <p>
+      سازه‌های مهندسی خورشیدی ما به گونه‌ای طراحی شده‌اند که فضای سقف شما را اشغال نمی‌کنند.
+      با امکان فروش برق اضافه به شبکه، سرمایه‌گذاری‌تان را دو برابر کنید.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">☎️ مشاوره رایگان بگیرید</a>
+      <a href="#calculator" class="btn-outline">🔢 صرفه‌جویی خود را حساب کنید</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">+۱۰</span>
+        <div class="stat-label">سال سابقه درخشان</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">۱ MW</span>
+        <div class="stat-label">تولید روزانه سازه</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">+۵۰۰</span>
+        <div class="stat-label">پروژه اجراشده</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num">۳۱</span>
+        <div class="stat-label">استان پوشش</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="why-section">
+  <div class="section-tag">مزیت‌های رقابتی ما</div>
+  <h2 class="section-title">چرا اسپادانا متفاوت است؟</h2>
+  <p class="section-subtitle">ما با رویکردی کاملاً مهندسی، راه‌حل‌هایی ارائه می‌دهیم که نه‌فقط برق تولید می‌کنند، بلکه فضای شما را تبدیل به سرمایه می‌کنند.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🏗️</div>
+      <h3>بدون اشغال سطح پشت‌بام</h3>
+      <p>سازه‌های اختصاصی ما به گونه‌ای طراحی می‌شوند که فضای سقف شما کاملاً آزاد بماند و بتوانید از آن برای کاربردهای دیگر استفاده کنید.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔧</div>
+      <h3>طراحی سفارشی برای هر پروژه</h3>
+      <p>هر سازه خورشیدی ما بر اساس نیاز واقعی مصرف شما طراحی می‌شود. بهینه‌سازی اقتصادی و مهندسی همزمان برای بیشترین بازدهی.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💡</div>
+      <h3>امکان فروش برق به شبکه</h3>
+      <p>برق اضافه‌ای که تولید می‌کنید به شبکه توزیع برق کشور فروخته می‌شود. درآمد دائمی از سرمایه‌گذاری خورشیدی‌تان.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🚚</div>
+      <h3>ارسال به سراسر ایران</h3>
+      <p>از شمال تا جنوب و از شرق تا غرب ایران را پوشش می‌دهیم. نصب حرفه‌ای توسط تیم مهندسی متخصص در محل شما.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🏆</div>
+      <h3>بیش از ۱۰ سال تجربه</h3>
+      <p>با بیش از ۵۰۰ پروژه اجرا شده در سراسر کشور، تجربه‌ای بی‌نظیر در طراحی و نصب سازه‌های مهندسی خورشیدی داریم.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📊</div>
+      <h3>طراحی اقتصادی متناسب</h3>
+      <p>محاسبات دقیق بازگشت سرمایه، بهینه‌سازی هزینه‌ها و طراحی متناسب با بودجه و نیاز واقعی شما.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="process">
+  <div class="section-tag">فرآیند کار</div>
+  <h2 class="section-title">از تماس تا برق‌رسانی در ۴ مرحله</h2>
+  <p class="section-subtitle">فرآیند ساده و شفاف ما از اولین تماس تا راه‌اندازی نهایی را بدانید.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">۱</div>
+      <h3>مشاوره اولیه</h3>
+      <p>بررسی نیاز و مصرف واقعی شما توسط کارشناس مهندسی</p>
+    </div>
+    <div class="step">
+      <div class="step-num">۲</div>
+      <h3>طراحی اختصاصی</h3>
+      <p>طراحی سازه خورشیدی سفارشی بر اساس ساختار ملک شما</p>
+    </div>
+    <div class="step">
+      <div class="step-num">۳</div>
+      <h3>تولید و ارسال</h3>
+      <p>ساخت سازه در کارخانه و ارسال به محل پروژه</p>
+    </div>
+    <div class="step">
+      <div class="step-num">۴</div>
+      <h3>نصب و راه‌اندازی</h3>
+      <p>نصب حرفه‌ای و اتصال به شبکه، شما برق تولید می‌کنید!</p>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits" class="benefits-section">
+  <div class="benefits-layout">
+    <div>
+      <div class="section-tag">مزایای انرژی خورشیدی</div>
+      <h2 class="section-title">چرا باید همین حالا اقدام کنید؟</h2>
+      <ul class="benefit-list">
+        <li>
+          <div class="check">✓</div>
+          <div class="benefit-text">
+            <h4>قطعی برق تابستان ۱۴۰۵ را فراموش کنید</h4>
+            <p>در اوج گرما و بحران برق، خانه شما همیشه روشن می‌ماند.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div class="benefit-text">
+            <h4>صرفه‌جویی ۸۰٪ در قبض برق</h4>
+            <p>برق تولیدی خود را مصرف کنید و هزینه‌های ماهانه را به حداقل برسانید.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div class="benefit-text">
+            <h4>بازگشت سرمایه در ۳ تا ۵ سال</h4>
+            <p>با فروش برق به شبکه، سرمایه‌گذاری شما در مدت کوتاهی جبران می‌شود.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div class="benefit-text">
+            <h4>افزایش ارزش ملک شما</h4>
+            <p>پنل‌های خورشیدی ارزش ملک شما را بین ۱۰ تا ۲۰ درصد افزایش می‌دهند.</p>
+          </div>
+        </li>
+        <li>
+          <div class="check">✓</div>
+          <div class="benefit-text">
+            <h4>کمک به محیط‌زیست ایران</h4>
+            <p>کاهش انتشار کربن و استفاده از انرژی پاک برای نسل‌های آینده.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="savings-card">
+      <h3>مثال واقعی صرفه‌جویی</h3>
+      <div class="savings-row">
+        <span>مصرف ماهانه</span>
+        <span class="val">۵۰۰ کیلووات</span>
+      </div>
+      <div class="savings-row">
+        <span>ظرفیت سیستم پیشنهادی</span>
+        <span class="val">۱۰ کیلووات</span>
+      </div>
+      <div class="savings-row">
+        <span>تولید ماهانه</span>
+        <span class="val">۱,۴۰۰ کیلووات</span>
+      </div>
+      <div class="savings-row">
+        <span>صرفه‌جویی ماهانه</span>
+        <span class="val" style="color:#10B981">~۳,۵۰۰,۰۰۰ تومان</span>
+      </div>
+      <div class="savings-row">
+        <span>برق فروشی به شبکه</span>
+        <span class="val" style="color:#10B981">+۲۰,۵۰۰,۰۰۰ تومان</span>
+      </div>
+      <a href="#contact" class="savings-cta">📞 مشاوره رایگان بگیرید</a>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calc-section" id="calculator">
+  <div class="centered">
+    <div class="section-tag">ماشین حساب خورشیدی</div>
+    <h2 class="section-title">صرفه‌جویی خود را محاسبه کنید</h2>
+    <p class="section-subtitle">با وارد کردن مصرف ماهانه‌تان، میزان صرفه‌جویی و درآمد احتمالی خود را ببینید.</p>
+  </div>
+  <div class="calc-box">
+    <div class="calc-row">
+      <label>مصرف ماهانه برق شما (کیلووات‌ساعت)</label>
+      <span class="current-val" id="consume-val">۳۰۰ کیلووات‌ساعت</span>
+      <input type="range" min="100" max="2000" value="300" step="50" id="consume-slider">
+      <div class="val-display"><span>۱۰۰</span><span>۲۰۰۰</span></div>
+    </div>
+    <div class="calc-row">
+      <label>نرخ برق (تومان به ازای هر کیلووات)</label>
+      <span class="current-val" id="rate-val">۸,۰۰۰ تومان</span>
+      <input type="range" min="3000" max="20000" value="8000" step="500" id="rate-slider">
+      <div class="val-display"><span>۳,۰۰۰</span><span>۲۰,۰۰۰</span></div>
+    </div>
+    <div class="calc-results">
+      <div class="calc-result-card">
+        <span class="label">صرفه‌جویی ماهانه</span>
+        <span class="value" id="monthly-save">—</span>
+        <span class="unit">تومان</span>
+      </div>
+      <div class="calc-result-card">
+        <span class="label">صرفه‌جویی سالانه</span>
+        <span class="value" id="yearly-save">—</span>
+        <span class="unit">تومان</span>
+      </div>
+      <div class="calc-result-card">
+        <span class="label">بازگشت سرمایه</span>
+        <span class="value" id="payback">—</span>
+        <span class="unit">سال</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="centered">
+    <div class="section-tag">محصولات و راه‌حل‌ها</div>
+    <h2 class="section-title">سازه‌های مهندسی خورشیدی ما</h2>
+    <p class="section-subtitle">طراحی شده برای هر نوع ملک و هر نیاز مصرفی</p>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img">🏠</div>
+      <div class="product-body">
+        <span class="product-badge">مسکونی</span>
+        <h3>سازه خورشیدی مسکونی</h3>
+        <p>مناسب برای خانه‌ها و آپارتمان‌ها با طراحی که فضای پشت‌بام را آزاد می‌گذارد.</p>
+        <a href="#contact" class="product-link">دریافت مشاوره ←</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">🏢</div>
+      <div class="product-body">
+        <span class="product-badge">تجاری</span>
+        <h3>سازه خورشیدی تجاری</h3>
+        <p>برای مجتمع‌های تجاری، اداری و صنعتی با ظرفیت بالا و بازدهی حداکثری.</p>
+        <a href="#contact" class="product-link">دریافت مشاوره ←</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">🌾</div>
+      <div class="product-body">
+        <span class="product-badge">کشاورزی</span>
+        <h3>سازه خورشیدی کشاورزی</h3>
+        <p>طراحی مخصوص باغ‌ها، مزارع و گلخانه‌ها با سایه‌بان خورشیدی ترکیبی.</p>
+        <a href="#contact" class="product-link">دریافت مشاوره ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-section">
+  <div class="centered">
+    <div class="section-tag">نظرات مشتریان</div>
+    <h2 class="section-title">مشتریان ما چه می‌گویند؟</h2>
+    <p class="section-subtitle">بیش از ۵۰۰ پروژه موفق در سراسر ایران</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>سازه‌ای که اسپادانا نصب کرد کاملاً سفارشی بود. بعد از ۴ ماه قبض برقم صفر شده و حتی درآمد هم دارم از فروش به شبکه.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">رح</div>
+        <div class="author-info">
+          <h4>رحیم حسینی</h4>
+          <p>تهران، شهرک غرب</p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>بهترین ویژگی‌شان این است که پشت‌بام ما کاملاً آزاد ماند. طراحی مهندسی‌شان واقعاً منحصربه‌فرد است. تیم حرفه‌ای و متعهد.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">فر</div>
+        <div class="author-info">
+          <h4>فریده رضایی</h4>
+          <p>اصفهان، خمینی‌شهر</p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>برای کارخانه‌ام یک مگاوات سازه خورشیدی سفارش دادم. برق کاملاً قطع نمی‌شه و هزینه برق ۷۰٪ کاهش یافته. سرمایه‌گذاری عالی.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">مع</div>
+        <div class="author-info">
+          <h4>مهدی عباسی</h4>
+          <p>تبریز، منطقه صنعتی</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq-section">
+  <div class="centered">
+    <div class="section-tag">سؤالات متداول</div>
+    <h2 class="section-title">پاسخ سؤالات شما</h2>
+    <p class="section-subtitle">رایج‌ترین سؤالاتی که مشتریان می‌پرسند</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        آیا واقعاً پشت‌بامم اشغال نمی‌شود؟
+        <span class="arrow">›</span>
+      </button>
+      <div class="faq-a">بله، این مهم‌ترین تفاوت سازه‌های مهندسی اسپادانا با پنل‌های معمولی است. سازه‌های ما به گونه‌ای طراحی می‌شوند که روی نمای ساختمان یا دیوارها نصب می‌شوند و فضای پشت‌بام کاملاً آزاد می‌ماند.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        چه مدت طول می‌کشد تا سیستم راه‌اندازی شود؟
+        <span class="arrow">›</span>
+      </button>
+      <div class="faq-a">از ابتدای طراحی تا نصب نهایی معمولاً بین ۳ تا ۶ هفته طول می‌کشد، بسته به ظرفیت سیستم و پیچیدگی طراحی. پس از نصب، همان روز می‌توانید برق تولید کنید.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        آیا در شهر من نصب انجام می‌دهید؟
+        <span class="arrow">›</span>
+      </button>
+      <div class="faq-a">بله، اسپادانا در تمام ۳۱ استان ایران خدمات ارائه می‌دهد. تیم مهندسی ما برای انجام طراحی و نصب به محل پروژه شما اعزام می‌شوند. برای هماهنگی با ما تماس بگیرید.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        چطور می‌توانم برق اضافه را به شبکه بفروشم؟
+        <span class="arrow">›</span>
+      </button>
+      <div class="faq-a">تیم ما کمک می‌کند تا مجوز فروش برق به شبکه توزیع را از وزارت نیرو دریافت کنید. این فرآیند معمولاً ۴ تا ۸ هفته طول می‌کشد و ما تمام مراحل اداری را همراهی می‌کنیم.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        گارانتی و خدمات پس از فروش چگونه است؟
+        <span class="arrow">›</span>
+      </button>
+      <div class="faq-a">پنل‌های خورشیدی ۲۵ سال ضمانت عملکرد دارند. سازه‌های مهندسی ما نیز ۱۰ سال گارانتی دارند. خدمات پشتیبانی و نگهداری دوره‌ای نیز در تمام شهرهای ایران ارائه می‌شود.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        هزینه نصب پنل خورشیدی چقدر است؟
+        <span class="arrow">›</span>
+      </button>
+      <div class="faq-a">هزینه بستگی به ظرفیت مورد نیاز و نوع سازه دارد. ما یک بازدید و مشاوره کاملاً رایگان ارائه می‌دهیم و پس از بررسی، قیمت دقیق و محاسبه بازگشت سرمایه را به شما ارائه می‌کنیم.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section" id="cta">
+  <h2>برای روزهای بی‌برقی تابستان ۱۴۰۵ آماده‌اید؟</h2>
+  <p>همین حالا تماس بگیرید و مشاوره رایگان بگیرید. کارشناسان ما پاسخگو هستند.</p>
+  <div class="cta-phones">
+    <a href="tel:02182809833" class="cta-phone">📞 021-82809833</a>
+    <a href="tel:02188633892" class="cta-phone">📞 021-88633892</a>
+    <a href="tel:09122400138" class="cta-phone">📱 0912-2400138</a>
+    <a href="tel:09122404115" class="cta-phone">📱 0912-2404115</a>
+  </div>
+  <a href="https://ble.ir/ESPADANACO" target="_blank" class="btn-primary" style="margin:0 auto; display:inline-flex;">🔗 ble.ir/ESPADANACO</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-layout">
+    <div class="contact-info">
+      <div class="section-tag">تماس با ما</div>
+      <h2 class="section-title">با ما تماس بگیرید</h2>
+      <p class="section-subtitle" style="margin-bottom:32px">کارشناسان مهندسی ما آماده پاسخگویی و ارائه مشاوره رایگان هستند.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-body">
+          <h4>آدرس</h4>
+          <p>تهران، کوی دانشگاه، پلاک ۱۹۴۵، شماره ۲۴</p>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-body">
+          <h4>تلفن‌های تماس</h4>
+          <a href="tel:02182809833">021-82809833</a>
+          <a href="tel:02188633892">021-88633892</a>
+          <a href="tel:09122400138">0912-2400138</a>
+          <a href="tel:09122404115">0912-2404115</a>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">🌐</div>
+        <div class="contact-detail-body">
+          <h4>لینک کوتاه</h4>
+          <a href="https://ble.ir/ESPADANACO" target="_blank">ble.ir/ESPADANACO</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEW FORM WITH REACTION -->
+    <div class="contact-form" id="contact-form-wrap">
+      <!-- FORM -->
+      <div id="form-body">
+        <h3>☀️ درخواست مشاوره رایگان</h3>
+        <p class="form-subtitle">اطلاعات خود را وارد کنید — کارشناسان ما در کمترین زمان با شما تماس خواهند گرفت.</p>
+        <div class="form-group">
+          <label>نام و نام خانوادگی <span>*</span></label>
+          <input type="text" id="f-name" placeholder="مثلاً: علی احمدی">
+        </div>
+        <div class="form-group">
+          <label>شماره موبایل <span>*</span></label>
+          <input type="tel" id="f-phone" placeholder="09xxxxxxxxx" dir="ltr">
+        </div>
+        <div class="form-group">
+          <label>شهر <span>*</span></label>
+          <input type="text" id="f-city" placeholder="شهر محل سکونت شما">
+        </div>
+        <div class="form-group">
+          <label>نوع مصرف <span>*</span></label>
+          <select id="f-type">
+            <option value="">— انتخاب کنید —</option>
+            <option value="مسکونی">مسکونی (خانه/آپارتمان)</option>
+            <option value="تجاری">تجاری/اداری</option>
+            <option value="صنعتی">صنعتی/کارخانه</option>
+            <option value="کشاورزی">کشاورزی/مزرعه</option>
+          </select>
+        </div>
+        <div id="form-error" style="display:none; color:#FF6B6B; font-size:14px; margin-bottom:12px; padding:10px; background:rgba(255,107,107,0.08); border-radius:8px; border:1px solid rgba(255,107,107,0.2);">
+          لطفاً تمام فیلدهای ستاره‌دار را پر کنید.
+        </div>
+        <button class="form-submit" onclick="submitForm()">
+          ☎️ درخواست مشاوره رایگان — همین الان ثبت کنید
+        </button>
+      </div>
+
+      <!-- SUCCESS STATE -->
+      <div class="success-msg" id="success-msg">
+        <div class="success-icon">✅</div>
+        <h3>درخواست شما با موفقیت ثبت شد!</h3>
+        <p>
+          <strong id="s-name"></strong> عزیز،<br>
+          کارشناسان اسپادانا به زودی با شماره <strong id="s-phone" dir="ltr"></strong> با شما تماس خواهند گرفت.<br><br>
+          تیم مهندسی ما <strong style="color:var(--green-neon)">بهترین و اقتصادی‌ترین راهکار</strong> را متناسب با نیاز مصرف شما در <strong id="s-city"></strong> ارائه خواهند کرد.<br><br>
+          <span style="font-size:13px; color:rgba(138,164,192,0.7)">در صورت فوریت می‌توانید مستقیم تماس بگیرید:</span>
+        </p>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:16px; flex-wrap:wrap;">
+          <a href="tel:02182809833" style="background:var(--sun); color:var(--sky); padding:10px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:14px; direction:ltr;">📞 021-82809833</a>
+          <a href="tel:09122400138" style="background:rgba(245,158,11,0.15); color:var(--sun); padding:10px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:14px; direction:ltr; border:1px solid rgba(245,158,11,0.3);">📱 0912-2400138</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
+        <div style="width:38px; height:38px; background:var(--sun); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px;">☀️</div>
+        <span style="color:var(--white); font-size:22px; font-weight:700;">اسپادانا</span>
+      </div>
+      <p>برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ۱۰ سال سابقه درخشان. توان تولید روزانه یک مگاوات سازه خورشیدی سفارشی.</p>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات</h4>
+      <ul>
+        <li><a href="#products">سازه مسکونی</a></li>
+        <li><a href="#products">سازه تجاری</a></li>
+        <li><a href="#products">سازه کشاورزی</a></li>
+        <li><a href="#contact">مشاوره رایگان</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>اطلاعات</h4>
+      <ul>
+        <li><a href="#why">چرا اسپادانا؟</a></li>
+        <li><a href="#process">فرآیند کار</a></li>
+        <li><a href="#faq">سؤالات متداول</a></li>
+        <li><a href="#calculator">محاسبه صرفه‌جویی</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>تماس با ما</h4>
+      <div class="footer-contact-item">
+        <span>📍</span>
+        <span>تهران، کوی دانشگاه، پلاک ۱۹۴۵، شماره ۲۴</span>
+      </div>
+      <div class="footer-contact-item">
+        <span>📞</span>
+        <div>
+          <a href="tel:02182809833">021-82809833</a>
+          <a href="tel:02188633892">021-88633892</a>
+          <a href="tel:09122400138">0912-2400138</a>
+          <a href="tel:09122404115">0912-2404115</a>
+        </div>
+      </div>
+      <div class="footer-contact-item">
+        <span>🌐</span>
+        <a href="https://ble.ir/ESPADANACO" target="_blank">ble.ir/ESPADANACO</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© ۱۴۰۵ اسپادانا — تمام حقوق محفوظ است</span>
+    <span>تهران، کوی دانشگاه، پلاک ۱۹۴۵، شماره ۲۴ &nbsp;|&nbsp; <a href="tel:02182809833">021-82809833</a></span>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = ans.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q.open').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { ans.classList.add('open'); btn.classList.add('open'); }
+}
+
+function numFa(n) {
+  return n.toLocaleString('fa-IR');
+}
+
+function calc() {
+  const consume = parseInt(document.getElementById('consume-slider').value);
+  const rate = parseInt(document.getElementById('rate-slider').value);
+  document.getElementById('consume-val').textContent = numFa(consume) + ' کیلووات‌ساعت';
+  document.getElementById('rate-val').textContent = numFa(rate) + ' تومان';
+  const monthly = Math.round(consume * rate * 0.85);
+  const yearly = monthly * 12;
+  const systemCost = consume * rate * 40;
+  const payback = Math.round((systemCost / yearly) * 10) / 10;
+  document.getElementById('monthly-save').textContent = numFa(monthly);
+  document.getElementById('yearly-save').textContent = numFa(yearly);
+  document.getElementById('payback').textContent = payback.toFixed(1);
+}
+
+document.getElementById('consume-slider').addEventListener('input', calc);
+document.getElementById('rate-slider').addEventListener('input', calc);
+calc();
+
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const city = document.getElementById('f-city').value.trim();
+  const type = document.getElementById('f-type').value;
+  const errEl = document.getElementById('form-error');
+
+  if (!name || !phone || !city || !type) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  // Populate success state
+  document.getElementById('s-name').textContent = name;
+  document.getElementById('s-phone').textContent = phone;
+  document.getElementById('s-city').textContent = city;
+
+  // Switch views
+  document.getElementById('form-body').style.display = 'none';
+  document.getElementById('success-msg').classList.add('show');
+
+  // Log to console (replace with real endpoint as needed)
+  // Save to localStorage
+  try {
+    const leads = JSON.parse(localStorage.getItem("espadana_leads") || "[]");
+    leads.push({ name, phone, city, type, time: new Date().toISOString() });
+    localStorage.setItem("espadana_leads", JSON.stringify(leads));
+  } catch(e) {}
+  console.log("Lead saved:", { name, phone, city, type });
+}
+</script>
+</body>
+</html>
