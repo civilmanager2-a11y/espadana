@@ -11,12 +11,12 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --sun: #F59E0B;
-    --sun-deep: #D97706;
+    --sun: #0068C8;
+    --sun-deep: #0052A3;
     --sky: #060E1A;
     --sky-mid: #0D1F35;
     --sky-panel: #0A1628;
-    --panel-line: rgba(245,158,11,0.08);
+    --panel-line: rgba(0,104,200,0.08);
     --green: #10B981;
     --green-neon: #00FF88;
     --green-neon-deep: #00D470;
@@ -46,8 +46,8 @@
     background-image:
       linear-gradient(var(--panel-line) 1px, transparent 1px),
       linear-gradient(90deg, var(--panel-line) 1px, transparent 1px),
-      linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0,104,200,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,104,200,0.03) 1px, transparent 1px);
     background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
   }
 
@@ -60,7 +60,7 @@
     white-space: nowrap;
     position: relative;
     z-index: 100;
-    border-bottom: 1px solid rgba(245,158,11,0.2);
+    border-bottom: 1px solid rgba(0,104,200,0.2);
   }
   .ticker-label {
     display: inline-block;
@@ -105,7 +105,7 @@
     position: sticky;
     top: 0;
     z-index: 99;
-    border-bottom: 1px solid rgba(245,158,11,0.15);
+    border-bottom: 1px solid rgba(0,104,200,0.15);
   }
   .nav-logo {
     display: flex;
@@ -113,22 +113,12 @@
     gap: 12px;
     text-decoration: none;
   }
-  .logo-icon {
-    width: 42px;
-    height: 42px;
-    background: var(--sun);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
+  .logo-img {
+    height: 44px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
   }
-  .logo-text {
-    color: var(--white);
-    font-size: 22px;
-    font-weight: 700;
-  }
-  .logo-text span { color: var(--sun); }
   .nav-links {
     display: flex;
     gap: 28px;
@@ -152,7 +142,8 @@
 
   /* HERO */
   .hero {
-    background: linear-gradient(135deg, #020810 0%, #081525 60%, #060E1A 100%);
+    background: linear-gradient(135deg, rgba(2,8,16,0.92) 0%, rgba(8,21,37,0.85) 60%, rgba(6,14,26,0.9) 100%),
+                url('assets/solar-hero.webp') center/cover no-repeat;
     min-height: 90vh;
     display: flex;
     align-items: center;
@@ -165,7 +156,7 @@
     position: absolute;
     top: -100px; left: -100px;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,104,200,0.18) 0%, transparent 70%);
     border-radius: 50%;
   }
   .hero::after {
@@ -181,8 +172,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(0,104,200,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,104,200,0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
   }
@@ -195,8 +186,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(245,158,11,0.12);
-    border: 1px solid rgba(245,158,11,0.35);
+    background: rgba(0,104,200,0.12);
+    border: 1px solid rgba(0,104,200,0.35);
     color: var(--sun);
     font-size: 13px;
     font-weight: 600;
@@ -250,13 +241,13 @@
     gap: 8px;
     transition: border-color 0.2s, background 0.2s;
   }
-  .btn-outline:hover { border-color: var(--sun); background: rgba(245,158,11,0.08); }
+  .btn-outline:hover { border-color: var(--sun); background: rgba(0,104,200,0.08); }
   .hero-stats {
     display: flex;
     gap: 40px;
     margin-top: 56px;
     padding-top: 32px;
-    border-top: 1px solid rgba(245,158,11,0.15);
+    border-top: 1px solid rgba(0,104,200,0.15);
     flex-wrap: wrap;
   }
   .stat { text-align: center; }
@@ -302,20 +293,20 @@
   }
   .why-card {
     background: rgba(13,31,53,0.8);
-    border: 1px solid rgba(245,158,11,0.12);
+    border: 1px solid rgba(0,104,200,0.12);
     border-radius: var(--radius);
     padding: 28px;
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
   }
   .why-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px rgba(245,158,11,0.08);
-    border-color: rgba(245,158,11,0.3);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4), 0 0 20px rgba(0,104,200,0.08);
+    border-color: rgba(0,104,200,0.3);
   }
   .why-icon {
     width: 52px; height: 52px;
-    background: rgba(245,158,11,0.1);
-    border: 1px solid rgba(245,158,11,0.2);
+    background: rgba(0,104,200,0.1);
+    border: 1px solid rgba(0,104,200,0.2);
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     font-size: 26px;
@@ -325,7 +316,7 @@
   .why-card p { font-size: 15px; color: var(--gray-600); line-height: 1.7; }
 
   /* HOW IT WORKS */
-  .how-section { background: #020810; border-top: 1px solid rgba(245,158,11,0.1); border-bottom: 1px solid rgba(245,158,11,0.1); }
+  .how-section { background: #020810; border-top: 1px solid rgba(0,104,200,0.1); border-bottom: 1px solid rgba(0,104,200,0.1); }
   .how-section .section-title { color: var(--white); }
   .how-section .section-subtitle { color: rgba(232,240,250,0.55); }
   .steps-grid {
@@ -370,7 +361,7 @@
     align-items: flex-start;
     gap: 14px;
     padding: 16px 0;
-    border-bottom: 1px solid rgba(245,158,11,0.1);
+    border-bottom: 1px solid rgba(0,104,200,0.1);
   }
   .benefit-list li:last-child { border-bottom: none; }
   .check {
@@ -385,7 +376,7 @@
   .benefit-text p { font-size: 14px; color: var(--gray-600); }
   .savings-card {
     background: #020810;
-    border: 1px solid rgba(245,158,11,0.15);
+    border: 1px solid rgba(0,104,200,0.15);
     border-radius: var(--radius);
     padding: 36px;
     color: var(--white);
@@ -424,32 +415,32 @@
   }
   .product-card {
     background: var(--sky-panel);
-    border: 1px solid rgba(245,158,11,0.12);
+    border: 1px solid rgba(0,104,200,0.12);
     border-radius: var(--radius);
     overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 20px rgba(245,158,11,0.06);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5), 0 0 20px rgba(0,104,200,0.06);
   }
   .product-img {
     height: 180px;
     background: linear-gradient(135deg, #0D1F35 0%, #020810 100%);
     display: flex; align-items: center; justify-content: center;
     font-size: 60px;
-    border-bottom: 1px solid rgba(245,158,11,0.1);
+    border-bottom: 1px solid rgba(0,104,200,0.1);
   }
   .product-body { padding: 24px; }
   .product-badge {
     display: inline-block;
-    background: rgba(245,158,11,0.1);
+    background: rgba(0,104,200,0.1);
     color: var(--sun);
     font-size: 12px; font-weight: 700;
     padding: 4px 10px;
     border-radius: 100px;
     margin-bottom: 10px;
-    border: 1px solid rgba(245,158,11,0.2);
+    border: 1px solid rgba(0,104,200,0.2);
   }
   .product-body h3 { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
   .product-body p { font-size: 14px; color: var(--gray-600); margin-bottom: 16px; }
@@ -471,7 +462,7 @@
   }
   .testimonial {
     background: #060E1A;
-    border: 1px solid rgba(245,158,11,0.12);
+    border: 1px solid rgba(0,104,200,0.12);
     border-radius: var(--radius);
     padding: 28px;
   }
@@ -480,8 +471,8 @@
   .testimonial-author { display: flex; align-items: center; gap: 12px; }
   .author-avatar {
     width: 44px; height: 44px;
-    background: rgba(245,158,11,0.15);
-    border: 1px solid rgba(245,158,11,0.3);
+    background: rgba(0,104,200,0.15);
+    border: 1px solid rgba(0,104,200,0.3);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: var(--sun); font-weight: 700; font-size: 16px;
@@ -491,18 +482,19 @@
 
   /* CTA SECTION */
   .cta-section {
-    background: linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #D97706 100%);
+    background: linear-gradient(135deg, #0052A3 0%, #0068C8 50%, #0052A3 100%);
     text-align: center;
     padding: 80px 5%;
   }
-  .cta-section h2 { font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: var(--sky); margin-bottom: 16px; }
-  .cta-section p { font-size: 18px; color: rgba(6,14,26,0.75); margin-bottom: 36px; }
+  .cta-section h2 { font-size: clamp(26px, 4vw, 42px); font-weight: 900; color: var(--white); margin-bottom: 16px; }
+  .cta-section p { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 36px; }
   .cta-phones {
     display: flex; flex-wrap: wrap; gap: 12px;
     justify-content: center; margin-bottom: 24px;
   }
   .cta-phone {
-    background: var(--sky);
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
     color: var(--white);
     padding: 12px 24px;
     border-radius: var(--radius-sm);
@@ -512,12 +504,12 @@
     direction: ltr;
     transition: background 0.2s;
   }
-  .cta-phone:hover { background: #0D1F35; }
+  .cta-phone:hover { background: rgba(255,255,255,0.25); }
 
   /* FAQ */
   .faq-section { background: #060E1A; }
   .faq-list { max-width: 760px; margin: 48px auto 0; }
-  .faq-item { border-bottom: 1px solid rgba(245,158,11,0.1); }
+  .faq-item { border-bottom: 1px solid rgba(0,104,200,0.1); }
   .faq-q {
     width: 100%; background: none; border: none;
     text-align: right;
@@ -549,8 +541,8 @@
   .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
   .contact-detail-icon {
     width: 40px; height: 40px;
-    background: rgba(245,158,11,0.1);
-    border: 1px solid rgba(245,158,11,0.2);
+    background: rgba(0,104,200,0.1);
+    border: 1px solid rgba(0,104,200,0.2);
     border-radius: var(--radius-sm);
     display: flex; align-items: center; justify-content: center;
     font-size: 20px; flex-shrink: 0;
@@ -598,7 +590,7 @@
   .form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: 13px 16px;
-    border: 1px solid rgba(245,158,11,0.15);
+    border: 1px solid rgba(0,104,200,0.15);
     border-radius: var(--radius-sm);
     font-family: 'Vazirmatn', sans-serif;
     font-size: 15px;
@@ -684,7 +676,7 @@
     max-width: 700px;
     margin: 48px auto 0;
     background: var(--sky-panel);
-    border: 1px solid rgba(245,158,11,0.12);
+    border: 1px solid rgba(0,104,200,0.12);
     border-radius: var(--radius);
     padding: 40px;
   }
@@ -705,7 +697,7 @@
   }
   .calc-result-card {
     background: #020810;
-    border: 1px solid rgba(245,158,11,0.15);
+    border: 1px solid rgba(0,104,200,0.15);
     border-radius: var(--radius-sm);
     padding: 20px; text-align: center;
   }
@@ -714,7 +706,7 @@
   .calc-result-card .unit { font-size: 12px; color: rgba(232,240,250,0.4); margin-top: 4px; display: block; }
 
   /* FOOTER */
-  footer { background: #020810; color: rgba(232,240,250,0.6); padding: 56px 5% 0; border-top: 1px solid rgba(245,158,11,0.1); }
+  footer { background: #020810; color: rgba(232,240,250,0.6); padding: 56px 5% 0; border-top: 1px solid rgba(0,104,200,0.1); }
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1.5fr;
@@ -738,6 +730,67 @@
   }
   .footer-bottom a { color: var(--sun); text-decoration: none; }
 
+  /* PROJECT SHOWCASE */
+  .project-section { background: #020810; border-top: 1px solid rgba(0,104,200,0.1); }
+  .project-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .project-img-wrap {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(0,104,200,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .project-img-wrap img { width: 100%; display: block; }
+  .project-features { list-style: none; margin-top: 24px; }
+  .project-features li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,104,200,0.1);
+    font-size: 15px; color: var(--gray-600);
+  }
+  .project-features li:last-child { border-bottom: none; }
+  .project-features li span:first-child { color: var(--sun); font-size: 18px; }
+
+  /* BRANDS */
+  .brands-section { background: var(--sky-panel); padding: 60px 5%; }
+  .brands-img-wrap {
+    margin-top: 36px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(0,104,200,0.15);
+    background: rgba(255,255,255,0.03);
+  }
+  .brands-img-wrap img { width: 100%; display: block; }
+
+  /* VIDEO SECTION */
+  .video-section { background: #020810; }
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 48px;
+  }
+  .video-wrap {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(0,104,200,0.2);
+    background: #000;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  }
+  .video-wrap video { width: 100%; display: block; max-height: 320px; object-fit: cover; }
+  .video-label {
+    padding: 14px 18px;
+    background: rgba(0,104,200,0.08);
+    font-size: 14px; font-weight: 700;
+    color: var(--gray-600);
+    border-top: 1px solid rgba(0,104,200,0.12);
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -747,6 +800,7 @@
     .steps-grid { grid-template-columns: 1fr; }
     .step:not(:last-child)::after { display: none; }
     .hero-stats { gap: 24px; }
+    .project-layout, .video-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
     .footer-grid { grid-template-columns: 1fr; }
@@ -767,8 +821,7 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">
-    <div class="logo-icon">☀️</div>
-    <div class="logo-text">اسپا<span>دانا</span></div>
+    <img src="assets/logo.jpg" alt="اسپادانا" class="logo-img">
   </a>
   <ul class="nav-links">
     <li><a href="#why">چرا ما؟</a></li>
@@ -1009,25 +1062,31 @@
   </div>
   <div class="products-grid">
     <div class="product-card">
-      <div class="product-img">🏠</div>
+      <div class="product-img" style="padding:0; height:200px;">
+        <img src="assets/project1.jpg" alt="سازه خورشیدی صنعتی" style="width:100%; height:100%; object-fit:cover;">
+      </div>
       <div class="product-body">
-        <span class="product-badge">مسکونی</span>
+        <span class="product-badge">صنعتی / مسکونی</span>
         <h3>سازه خورشیدی مسکونی</h3>
-        <p>مناسب برای خانه‌ها و آپارتمان‌ها با طراحی که فضای پشت‌بام را آزاد می‌گذارد.</p>
+        <p>مناسب برای خانه‌ها، کارگاه‌ها و آپارتمان‌ها با طراحی که فضای پشت‌بام را آزاد می‌گذارد.</p>
         <a href="#contact" class="product-link">دریافت مشاوره ←</a>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-img">🏢</div>
+      <div class="product-img" style="padding:0; height:200px;">
+        <img src="assets/project2.jpg" alt="سیستم کامل خورشیدی" style="width:100%; height:100%; object-fit:cover;">
+      </div>
       <div class="product-body">
-        <span class="product-badge">تجاری</span>
+        <span class="product-badge">تجاری / صنعتی</span>
         <h3>سازه خورشیدی تجاری</h3>
-        <p>برای مجتمع‌های تجاری، اداری و صنعتی با ظرفیت بالا و بازدهی حداکثری.</p>
+        <p>سیستم کامل شامل پنل، اینورتر هیبریدی، باتری و اتصال به شبکه برق سراسری.</p>
         <a href="#contact" class="product-link">دریافت مشاوره ←</a>
       </div>
     </div>
     <div class="product-card">
-      <div class="product-img">🌾</div>
+      <div class="product-img" style="padding:0; height:200px;">
+        <img src="assets/solar-hero.webp" alt="پنل خورشیدی" style="width:100%; height:100%; object-fit:cover;">
+      </div>
       <div class="product-body">
         <span class="product-badge">کشاورزی</span>
         <h3>سازه خورشیدی کشاورزی</h3>
@@ -1078,6 +1137,65 @@
           <p>تبریز، منطقه صنعتی</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT SHOWCASE -->
+<section class="project-section" id="showcase">
+  <div class="section-tag">نمونه پروژه واقعی</div>
+  <h2 class="section-title">سیستم خورشیدی کامل در عمل</h2>
+  <p class="section-subtitle">نصب و راه‌اندازی سیستم کامل خورشیدی با تمام اجزا توسط تیم مهندسی اسپادانا</p>
+  <div class="project-layout">
+    <div class="project-img-wrap">
+      <img src="assets/project2.jpg" alt="نمودار کامل سیستم خورشیدی اسپادانا">
+    </div>
+    <div>
+      <h3 style="font-size:22px; font-weight:800; color:var(--white); margin-bottom:20px;">اجزای سیستم مهندسی ما</h3>
+      <ul class="project-features">
+        <li><span>☀️</span><span>پنل خورشیدی — تبدیل انرژی خورشید به برق DC</span></li>
+        <li><span>⚡</span><span>اینورتر هیبریدی — مدیریت و تبدیل برق به AC</span></li>
+        <li><span>🔋</span><span>باتری خورشیدی — ذخیره برق برای زمان قطعی</span></li>
+        <li><span>📊</span><span>کنتور فروش برق — اندازه‌گیری برق فروشی به شبکه</span></li>
+        <li><span>🛡️</span><span>تابلو برق و تجهیزات حفاظتی</span></li>
+        <li><span>🌐</span><span>اتصال به شبکه سراسری برق</span></li>
+      </ul>
+      <a href="#contact" class="btn-primary" style="margin-top:28px; display:inline-flex;">☎️ مشاوره رایگان بگیرید</a>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-section" id="brands">
+  <div class="centered">
+    <div class="section-tag">برندهای معتبر</div>
+    <h2 class="section-title">با بهترین برندهای جهان کار می‌کنیم</h2>
+    <p class="section-subtitle">اسپادانا از تجهیزات معتبرترین تولیدکنندگان اینورتر و پنل دنیا استفاده می‌کند</p>
+  </div>
+  <div class="brands-img-wrap">
+    <img src="assets/brands.jpg" alt="برندهای معتبر تجهیزات خورشیدی">
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="video-section" id="videos">
+  <div class="centered">
+    <div class="section-tag">نمونه کارها</div>
+    <h2 class="section-title">ببینید چطور کار می‌کنیم</h2>
+    <p class="section-subtitle">ویدیوهای واقعی از پروژه‌های اجراشده توسط تیم مهندسی اسپادانا</p>
+  </div>
+  <div class="video-grid">
+    <div class="video-wrap">
+      <video controls preload="metadata" poster="assets/project1.jpg">
+        <source src="assets/video1.mp4" type="video/mp4">
+      </video>
+      <div class="video-label">نمونه پروژه — نصب سازه خورشیدی صنعتی</div>
+    </div>
+    <div class="video-wrap">
+      <video controls preload="metadata" poster="assets/project2.jpg">
+        <source src="assets/video2.mp4" type="video/mp4">
+      </video>
+      <div class="video-label">نمونه پروژه — سیستم کامل با اتصال به شبکه</div>
     </div>
   </div>
 </section>
@@ -1229,7 +1347,7 @@
         </p>
         <div style="display:flex; gap:10px; justify-content:center; margin-top:16px; flex-wrap:wrap;">
           <a href="tel:02182809833" style="background:var(--sun); color:var(--sky); padding:10px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:14px; direction:ltr;">📞 021-82809833</a>
-          <a href="tel:09122400138" style="background:rgba(245,158,11,0.15); color:var(--sun); padding:10px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:14px; direction:ltr; border:1px solid rgba(245,158,11,0.3);">📱 0912-2400138</a>
+          <a href="tel:09122400138" style="background:rgba(0,104,200,0.15); color:var(--sun); padding:10px 18px; border-radius:8px; font-weight:700; text-decoration:none; font-size:14px; direction:ltr; border:1px solid rgba(0,104,200,0.3);">📱 0912-2400138</a>
         </div>
       </div>
     </div>
@@ -1240,9 +1358,8 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px;">
-        <div style="width:38px; height:38px; background:var(--sun); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px;">☀️</div>
-        <span style="color:var(--white); font-size:22px; font-weight:700;">اسپادانا</span>
+      <div style="margin-bottom:4px;">
+        <img src="assets/logo.jpg" alt="اسپادانا" style="height:40px; width:auto; filter:brightness(0) invert(1);">
       </div>
       <p>برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ۱۰ سال سابقه درخشان. توان تولید روزانه یک مگاوات سازه خورشیدی سفارشی.</p>
     </div>
