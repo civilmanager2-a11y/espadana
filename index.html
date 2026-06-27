@@ -1683,14 +1683,17 @@ function submitForm() {
 
 <!-- ElevenLabs Conversational AI Widget -->
 <style>
-  elevenlabs-convai {
+  #elevenlabs-widget-wrapper {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    z-index: 9999;
+    z-index: 99999;
+    direction: ltr;
   }
 </style>
-<elevenlabs-convai agent-id="agent_0401kvqprbczf96asxcf0sjyrzgw"></elevenlabs-convai>
+<div id="elevenlabs-widget-wrapper">
+  <elevenlabs-convai agent-id="agent_0401kvqprbczf96asxcf0sjyrzgw"></elevenlabs-convai>
+</div>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
