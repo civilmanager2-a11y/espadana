@@ -1,93 +1,108 @@
 /**
- * Cloudflare Worker — WebSocket Proxy for ElevenLabs
- * Proxies wss://api.elevenlabs.io through Cloudflare
- * so Iranian users can connect without VPN.
+ * Cloudflare Worker — Full Proxy for ElevenLabs (HTTP + WebSocket)
+ * Handles both REST config fetches and WebSocket voice connections
+ * so Iranian users can use the chatbot without VPN.
  */
 
-const ELEVENLABS_HOST = 'api.elevenlabs.io';
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': '*',
+};
+
+// Map proxy host patterns to ElevenLabs hosts
+function getTargetHost(url) {
+  // Support both api.elevenlabs.io and api.us.elevenlabs.io
+  const path = url.pathname;
+  if (path.includes('/us/') || url.searchParams.get('region') === 'us') {
+    return 'api.us.elevenlabs.io';
+  }
+  return 'api.us.elevenlabs.io'; // default to us region (what the widget uses)
+}
 
 export default {
   async fetch(request) {
+    const url = new URL(request.url);
+
+    // CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { status: 204, headers: CORS_HEADERS });
+    }
+
     const upgradeHeader = request.headers.get('Upgrade');
 
-    // Handle CORS preflight
-    if (request.method === 'OPTIONS') {
+    // ── WebSocket proxy ──────────────────────────────────────────────
+    if (upgradeHeader && upgradeHeader.toLowerCase() === 'websocket') {
+      const targetHost = getTargetHost(url);
+      const targetUrl = `wss://${targetHost}${url.pathname}${url.search}`;
+      const proto = request.headers.get('Sec-WebSocket-Protocol');
+
+      let upstreamResponse;
+      try {
+        upstreamResponse = await fetch(targetUrl, {
+          headers: {
+            'Upgrade': 'websocket',
+            'Connection': 'Upgrade',
+            ...(proto ? { 'Sec-WebSocket-Protocol': proto } : {}),
+          },
+        });
+      } catch (err) {
+        return new Response('WS upstream error: ' + err.message, { status: 502 });
+      }
+
+      if (upstreamResponse.status !== 101) {
+        return new Response('WS upstream rejected: ' + upstreamResponse.status, { status: 502 });
+      }
+
+      const upstreamWs = upstreamResponse.webSocket;
+      const { 0: clientWs, 1: serverWs } = new WebSocketPair();
+      upstreamWs.accept();
+      serverWs.accept();
+
+      serverWs.addEventListener('message', ({ data }) => { try { upstreamWs.send(data); } catch (_) {} });
+      serverWs.addEventListener('close', ({ code, reason }) => { try { upstreamWs.close(code, reason); } catch (_) {} });
+      upstreamWs.addEventListener('message', ({ data }) => { try { serverWs.send(data); } catch (_) {} });
+      upstreamWs.addEventListener('close', ({ code, reason }) => { try { serverWs.close(code, reason); } catch (_) {} });
+
       return new Response(null, {
+        status: 101,
+        webSocket: clientWs,
         headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': '*',
+          ...CORS_HEADERS,
+          ...(proto ? { 'Sec-WebSocket-Protocol': proto } : {}),
         },
       });
     }
 
-    // Must be a WebSocket upgrade
-    if (!upgradeHeader || upgradeHeader.toLowerCase() !== 'websocket') {
-      return new Response('این سرویس فقط WebSocket می‌پذیرد.', { status: 426 });
-    }
+    // ── HTTP/REST proxy ──────────────────────────────────────────────
+    const targetHost = getTargetHost(url);
+    const targetUrl = `https://${targetHost}${url.pathname}${url.search}`;
 
-    const url = new URL(request.url);
-    const targetUrl = `wss://${ELEVENLABS_HOST}${url.pathname}${url.search}`;
+    const headers = new Headers(request.headers);
+    headers.set('host', targetHost);
+    headers.delete('cf-connecting-ip');
+    headers.delete('cf-ipcountry');
+    headers.delete('cf-ray');
+    headers.delete('cf-visitor');
 
-    // Forward headers (especially Sec-WebSocket-Protocol for ElevenLabs)
-    const forwardHeaders = {};
-    const proto = request.headers.get('Sec-WebSocket-Protocol');
-    if (proto) forwardHeaders['Sec-WebSocket-Protocol'] = proto;
-
-    // Connect to ElevenLabs upstream
     let upstreamResponse;
     try {
       upstreamResponse = await fetch(targetUrl, {
-        headers: {
-          'Upgrade': 'websocket',
-          'Connection': 'Upgrade',
-          ...forwardHeaders,
-        },
+        method: request.method,
+        headers,
+        body: request.method !== 'GET' && request.method !== 'HEAD' ? request.body : undefined,
       });
     } catch (err) {
-      return new Response('خطا در اتصال به ElevenLabs: ' + err.message, { status: 502 });
+      return new Response('HTTP upstream error: ' + err.message, { status: 502 });
     }
 
-    if (upstreamResponse.status !== 101) {
-      return new Response('ElevenLabs اتصال را رد کرد: ' + upstreamResponse.status, { status: 502 });
-    }
+    const responseHeaders = new Headers(upstreamResponse.headers);
+    Object.entries(CORS_HEADERS).forEach(([k, v]) => responseHeaders.set(k, v));
 
-    const upstreamWs = upstreamResponse.webSocket;
-
-    // Create client-facing WebSocket pair
-    const { 0: clientWs, 1: serverWs } = new WebSocketPair();
-
-    upstreamWs.accept();
-    serverWs.accept();
-
-    // Client → ElevenLabs
-    serverWs.addEventListener('message', ({ data }) => {
-      try { upstreamWs.send(data); } catch (_) {}
-    });
-    serverWs.addEventListener('close', ({ code, reason }) => {
-      try { upstreamWs.close(code, reason); } catch (_) {}
-    });
-    serverWs.addEventListener('error', () => {
-      try { upstreamWs.close(1011, 'client error'); } catch (_) {}
-    });
-
-    // ElevenLabs → Client
-    upstreamWs.addEventListener('message', ({ data }) => {
-      try { serverWs.send(data); } catch (_) {}
-    });
-    upstreamWs.addEventListener('close', ({ code, reason }) => {
-      try { serverWs.close(code, reason); } catch (_) {}
-    });
-    upstreamWs.addEventListener('error', () => {
-      try { serverWs.close(1011, 'upstream error'); } catch (_) {}
-    });
-
-    return new Response(null, {
-      status: 101,
-      webSocket: clientWs,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        ...(proto ? { 'Sec-WebSocket-Protocol': proto } : {}),
-      },
+    return new Response(upstreamResponse.body, {
+      status: upstreamResponse.status,
+      statusText: upstreamResponse.statusText,
+      headers: responseHeaders,
     });
   },
 };

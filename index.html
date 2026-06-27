@@ -1698,13 +1698,34 @@ function submitForm() {
 -->
 <script>
 (function () {
-  var WORKER_URL = 'wss://espadana-proxy.civilmanager2.workers.dev'; // Cloudflare WebSocket proxy
-  var ELEVENLABS = 'wss://api.elevenlabs.io';
-  if (WORKER_URL === 'REPLACE_WITH_YOUR_WORKER_URL') return; // هنوز deploy نشده
+  var HTTP_PROXY  = 'https://espadana-proxy.civilmanager2.workers.dev';
+  var WS_PROXY    = 'wss://espadana-proxy.civilmanager2.workers.dev';
+  var EL_HOSTS    = ['api.elevenlabs.io', 'api.us.elevenlabs.io'];
+
+  function isElevenLabs(url) {
+    return EL_HOSTS.some(function(h) { return url.indexOf(h) !== -1; });
+  }
+
+  // ── Intercept fetch (HTTP config requests) ──────────────────────
+  var _fetch = window.fetch;
+  window.fetch = function(input, init) {
+    var url = typeof input === 'string' ? input : (input && input.url) || '';
+    if (isElevenLabs(url)) {
+      var newUrl = url
+        .replace('https://api.us.elevenlabs.io', HTTP_PROXY)
+        .replace('https://api.elevenlabs.io', HTTP_PROXY);
+      input = typeof input === 'string' ? newUrl : new Request(newUrl, input);
+    }
+    return _fetch.call(this, input, init);
+  };
+
+  // ── Intercept WebSocket (voice connection) ──────────────────────
   var _WS = window.WebSocket;
   function ProxyWS(url, protocols) {
-    if (typeof url === 'string' && url.indexOf(ELEVENLABS) === 0) {
-      url = WORKER_URL + url.slice(ELEVENLABS.length);
+    if (typeof url === 'string' && isElevenLabs(url)) {
+      url = url
+        .replace('wss://api.us.elevenlabs.io', WS_PROXY)
+        .replace('wss://api.elevenlabs.io', WS_PROXY);
     }
     if (protocols !== undefined) return new _WS(url, protocols);
     return new _WS(url);
