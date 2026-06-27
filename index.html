@@ -1698,7 +1698,7 @@ function submitForm() {
 -->
 <script>
 (function () {
-  var WORKER_URL = 'REPLACE_WITH_YOUR_WORKER_URL'; // <-- اینجا را پس از deploy تغییر دهید
+  var WORKER_URL = 'wss://espadana-proxy.civilmanager2.workers.dev'; // Cloudflare WebSocket proxy
   var ELEVENLABS = 'wss://api.elevenlabs.io';
   if (WORKER_URL === 'REPLACE_WITH_YOUR_WORKER_URL') return; // هنوز deploy نشده
   var _WS = window.WebSocket;
