@@ -1585,5 +1585,17 @@ function submitForm() {
   console.log("Lead saved:", { name, phone, city, type });
 }
 </script>
+
+<!-- ElevenLabs Conversational AI Widget -->
+<style>
+  elevenlabs-convai {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+  }
+</style>
+<elevenlabs-convai agent-id="agent_0401kvqprbczf96asxcf0sjyrzgw"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
