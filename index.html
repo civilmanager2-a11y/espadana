@@ -1691,6 +1691,33 @@ function submitForm() {
     direction: ltr;
   }
 </style>
+
+<!-- Cloudflare WebSocket Proxy Interceptor
+     پس از deploy worker، آدرس WORKER_URL را با آدرس واقعی جایگزین کنید
+     مثال: wss://espadana-elevenlabs-proxy.YOUR_NAME.workers.dev
+-->
+<script>
+(function () {
+  var WORKER_URL = 'REPLACE_WITH_YOUR_WORKER_URL'; // <-- اینجا را پس از deploy تغییر دهید
+  var ELEVENLABS = 'wss://api.elevenlabs.io';
+  if (WORKER_URL === 'REPLACE_WITH_YOUR_WORKER_URL') return; // هنوز deploy نشده
+  var _WS = window.WebSocket;
+  function ProxyWS(url, protocols) {
+    if (typeof url === 'string' && url.indexOf(ELEVENLABS) === 0) {
+      url = WORKER_URL + url.slice(ELEVENLABS.length);
+    }
+    if (protocols !== undefined) return new _WS(url, protocols);
+    return new _WS(url);
+  }
+  ProxyWS.prototype = _WS.prototype;
+  ProxyWS.CONNECTING = _WS.CONNECTING;
+  ProxyWS.OPEN = _WS.OPEN;
+  ProxyWS.CLOSING = _WS.CLOSING;
+  ProxyWS.CLOSED = _WS.CLOSED;
+  window.WebSocket = ProxyWS;
+})();
+</script>
+
 <div id="elevenlabs-widget-wrapper">
   <elevenlabs-convai agent-id="agent_0401kvqprbczf96asxcf0sjyrzgw"></elevenlabs-convai>
 </div>
