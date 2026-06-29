@@ -327,8 +327,10 @@
     var offsetY = (vh - scaledH) / 2;
     el.style.marginTop = Math.max(0, offsetY) + 'px';
   }
-  applyScale();
-  window.addEventListener('resize', applyScale);
+  if (!isEmbed) {
+    applyScale();
+    window.addEventListener('resize', applyScale);
+  }
 
   /* ── Countdown ── */
   var DEADLINE_KEY = 'spadana_sale_deadline';

@@ -2056,9 +2056,11 @@ function submitForm() {
     iframe.style.transform = 'scale(' + scale + ')';
     frame.style.height = Math.round(1820 * scale) + 'px';
   }
+  /* Run immediately, then retry after paint and after fonts */
   scaleMini();
+  requestAnimationFrame(scaleMini);
+  setTimeout(scaleMini, 300);
   window.addEventListener('resize', scaleMini);
-  /* Re-run after fonts load (layout may shift) */
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(scaleMini);
   }
