@@ -36,16 +36,15 @@
   }
 
   /* Countdown overlaid INSIDE the image — above phone numbers */
-  /* Original design: countdown at top:1477/1820 = 81.2% → bottom:18.8% */
+  /* Original: top:1477 in 1820px canvas = 81.2% from top; positioned via JS */
   .cd-overlay {
     position: absolute;
-    bottom: 19%;
-    left: 20px; right: 20px;
+    top: 81.2%;          /* fallback before JS fires */
+    left: 0; right: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    /* subtle dark gradient so numbers are readable */
     background: radial-gradient(ellipse 80% 100% at 50% 60%, rgba(4,7,20,0.72), transparent);
     padding: 10px 0 8px;
     pointer-events: none;
@@ -161,25 +160,24 @@
     var img = document.getElementById('posterImg');
     var overlay = document.querySelector('.cd-overlay');
     var wrap = document.querySelector('.poster-wrap');
-    if (!img.naturalHeight) return;
+    if (!img.naturalHeight || !img.getBoundingClientRect().height) return;
 
-    /* Rendered image rect relative to wrapper */
     var iRect = img.getBoundingClientRect();
     var wRect = wrap.getBoundingClientRect();
 
-    var relTop  = iRect.top  - wRect.top;   /* top of image inside wrapper */
+    var relTop  = iRect.top  - wRect.top;
     var relLeft = iRect.left - wRect.left;
     var imgH    = iRect.height;
     var imgW    = iRect.width;
 
-    /* Original: countdown at top:1477 in 1820px → 81.2% from top = 18.8% from bottom */
-    var fromBottom = imgH * 0.188;
+    /* Original design: countdown top at 1477px in 1820px canvas = 81.2% from top */
+    var cdTop = relTop + imgH * 0.812;
 
-    overlay.style.position = 'absolute';
-    overlay.style.left     = relLeft + 'px';
-    overlay.style.right    = (wRect.width - relLeft - imgW) + 'px';
-    overlay.style.bottom   = (wRect.height - relTop - imgH + fromBottom) + 'px';
-    overlay.style.width    = imgW + 'px';
+    overlay.style.top    = cdTop + 'px';
+    overlay.style.bottom = 'auto';
+    overlay.style.left   = relLeft + 'px';
+    overlay.style.right  = 'auto';
+    overlay.style.width  = imgW + 'px';
   }
 
   var img = document.getElementById('posterImg');
