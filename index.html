@@ -2059,11 +2059,11 @@ function submitForm() {
   /* Run immediately, then retry after paint and after fonts */
   scaleMini();
   requestAnimationFrame(scaleMini);
-  setTimeout(scaleMini, 300);
+  setTimeout(scaleMini, 200);
   window.addEventListener('resize', scaleMini);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(scaleMini);
-  }
+  /* Re-run once iframe content is loaded */
+  var ifc = document.getElementById('posterIframe');
+  if (ifc) ifc.addEventListener('load', scaleMini);
 })();
 </script>
 </body>

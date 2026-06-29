@@ -311,6 +311,19 @@
     document.querySelector('.close-btn').style.display = 'none';
     document.querySelector('.poster-sway-wrap').style.animation = 'none';
     document.getElementById('cdOverlay').style.display = 'none';
+    /* Force body + shell to exactly 1024×1820 so canvas fills the iframe
+       regardless of meta-viewport device-width in parent browser */
+    var b = document.body;
+    b.style.cssText += ';width:1024px!important;height:1820px!important;display:block!important;overflow:hidden!important;padding:0!important;margin:0!important;';
+    var shell = document.querySelector('.poster-shell');
+    if (shell) {
+      shell.style.cssText += ';width:1024px!important;height:1820px!important;display:block!important;overflow:hidden!important;';
+    }
+    var sc = document.getElementById('posterScale');
+    if (sc) {
+      sc.style.marginTop = '0';
+      sc.style.transform = 'none';
+    }
   }
 
   /* ── Responsive scale — fit 1024×1820 canvas into viewport ── */
