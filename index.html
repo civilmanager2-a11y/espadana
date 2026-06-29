@@ -197,9 +197,118 @@
     min-height: 90vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 40px;
     padding: 80px 5%;
     position: relative;
     overflow: hidden;
+  }
+
+  /* POSTER AREA */
+  .hero-poster-wrap {
+    flex: 0 0 auto;
+    width: min(340px, 35vw);
+    position: relative;
+    z-index: 3;
+    perspective: 800px;
+  }
+  .hero-poster-pin {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    z-index: 10;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.6));
+    transform-origin: 50% 0;
+    animation: pinSway 4.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes pinSway {
+    0%,100% { transform: translateX(-50%) rotate(1.25deg); }
+    50%      { transform: translateX(-50%) rotate(-1.35deg); }
+  }
+  .hero-poster-card {
+    display: block;
+    cursor: pointer;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 2px rgba(255,184,0,0.4);
+    animation: posterSway 5.4s ease-in-out infinite;
+    transform-origin: 50% 0;
+    transition: box-shadow 0.3s;
+    position: relative;
+  }
+  .hero-poster-card:hover {
+    box-shadow: 0 24px 70px rgba(0,0,0,0.8), 0 0 0 2.5px rgba(255,184,0,0.7);
+  }
+  @keyframes posterSway {
+    0%,100% { transform: rotate(-1.25deg); }
+    50%      { transform: rotate(1.35deg); }
+  }
+  .hero-poster-card img {
+    width: 100%;
+    display: block;
+  }
+  .hero-poster-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px 14px 14px;
+    background: linear-gradient(transparent, rgba(4,7,20,0.92) 40%);
+    border-radius: 0 0 18px 18px;
+  }
+  .hero-poster-cd-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,200,80,0.8);
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .hero-poster-countdown {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    direction: ltr;
+  }
+  .cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .cd-digit {
+    font-size: 28px;
+    font-weight: 900;
+    color: #FFB800;
+    background: rgba(255,184,0,0.12);
+    border: 1.5px solid rgba(255,184,0,0.35);
+    border-radius: 8px;
+    width: 48px;
+    text-align: center;
+    line-height: 1.2;
+    padding: 4px 0;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.1s;
+  }
+  .cd-digit.tick { color: #fff; }
+  .cd-lbl { font-size: 9px; color: rgba(255,200,80,0.65); font-weight: 600; }
+  .cd-sep {
+    font-size: 24px;
+    font-weight: 900;
+    color: rgba(255,184,0,0.5);
+    line-height: 1.4;
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+  .hero-poster-click-hint {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 8px;
+  }
+  @media (max-width: 768px) {
+    .hero-poster-wrap { display: none; }
   }
   .hero::before {
     content: '';
@@ -948,6 +1057,39 @@
         <div class="stat-label">استان پوشش</div>
       </div>
     </div>
+  </div>
+
+  <!-- POSTER -->
+  <div class="hero-poster-wrap" id="heroPosterWrap">
+    <img src="assets/pushpin.png" alt="" class="hero-poster-pin" id="posterPin">
+    <a class="hero-poster-card" id="posterCard" href="poster.html" target="_blank" rel="noopener" title="برای مشاهده تمام‌صفحه کلیک کنید">
+      <img src="assets/spadana-poster.jpg" alt="پوستر فروش ویژه سازه‌های پشت‌بام اسپادانا">
+      <div class="hero-poster-overlay">
+        <div class="hero-poster-cd-label">⏳ پایان قیمت ویژه تا</div>
+        <div class="hero-poster-countdown" id="cdTimer">
+          <div class="cd-unit">
+            <div class="cd-digit" id="cd-d">۰۳</div>
+            <div class="cd-lbl">روز</div>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <div class="cd-digit" id="cd-h">۰۰</div>
+            <div class="cd-lbl">ساعت</div>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <div class="cd-digit" id="cd-m">۰۰</div>
+            <div class="cd-lbl">دقیقه</div>
+          </div>
+          <div class="cd-sep">:</div>
+          <div class="cd-unit">
+            <div class="cd-digit" id="cd-s">۰۰</div>
+            <div class="cd-lbl">ثانیه</div>
+          </div>
+        </div>
+        <div class="hero-poster-click-hint">👆 برای مشاهده تمام‌صفحه کلیک کنید</div>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -1743,5 +1885,144 @@ function submitForm() {
   <elevenlabs-convai agent-id="agent_0401kvqprbczf96asxcf0sjyrzgw"></elevenlabs-convai>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+<!-- Countdown + Sound -->
+<script>
+(function() {
+  var DEADLINE = new Date('2026-07-05T23:59:59').getTime();
+  var audioCtx = null;
+  var soundEnabled = false;
+  var stopped = false;
+  var lastSec = -1;
+
+  function toFa(n, pad) {
+    var s = String(n).padStart(pad || 2, '0');
+    return s.replace(/[0-9]/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+  }
+
+  function getCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function playTick(isLastTen) {
+    try {
+      var ctx = getCtx();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.frequency.value = isLastTen ? 1200 : 880;
+      osc.type = 'sine';
+      gain.gain.setValueAtTime(isLastTen ? 0.28 : 0.18, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (isLastTen ? 0.18 : 0.12));
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + (isLastTen ? 0.18 : 0.12));
+    } catch(e) {}
+  }
+
+  function playDing() {
+    try {
+      var ctx = getCtx();
+      [523, 659, 784].forEach(function(freq, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        var t = ctx.currentTime + i * 0.18;
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
+        osc.start(t);
+        osc.stop(t + 0.6);
+      });
+    } catch(e) {}
+  }
+
+  function stopSound() {
+    stopped = true;
+    if (audioCtx) { try { audioCtx.suspend(); } catch(e) {} }
+  }
+
+  function tick() {
+    if (stopped) return;
+    var now = Date.now();
+    var diff = DEADLINE - now;
+    if (diff <= 0) {
+      document.getElementById('cd-d').textContent = '۰۰';
+      document.getElementById('cd-h').textContent = '۰۰';
+      document.getElementById('cd-m').textContent = '۰۰';
+      document.getElementById('cd-s').textContent = '۰۰';
+      if (soundEnabled) playDing();
+      stopSound();
+      return;
+    }
+    var days  = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins  = Math.floor((diff % 3600000) / 60000);
+    var secs  = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-d').textContent = toFa(days);
+    document.getElementById('cd-h').textContent = toFa(hours);
+    document.getElementById('cd-m').textContent = toFa(mins);
+    document.getElementById('cd-s').textContent = toFa(secs);
+
+    if (soundEnabled && secs !== lastSec) {
+      lastSec = secs;
+      var el = document.getElementById('cd-s');
+      el.classList.add('tick');
+      setTimeout(function(){ el.classList.remove('tick'); }, 80);
+      var totalSecs = Math.floor(diff / 1000);
+      playTick(totalSecs <= 10);
+    }
+    setTimeout(tick, 500);
+  }
+
+  // Enable sound after first user interaction
+  function enableSound() {
+    if (soundEnabled || stopped) return;
+    soundEnabled = true;
+    try { getCtx().resume(); } catch(e) {}
+    document.removeEventListener('click', enableSound);
+    document.removeEventListener('keydown', enableSound);
+    document.removeEventListener('touchstart', enableSound);
+  }
+  document.addEventListener('click', enableSound);
+  document.addEventListener('keydown', enableSound);
+  document.addEventListener('touchstart', enableSound);
+
+  // Stop on scroll (user scrolled away from hero)
+  var scrollStopped = false;
+  window.addEventListener('scroll', function() {
+    if (scrollStopped) return;
+    var hero = document.getElementById('home');
+    if (hero) {
+      var rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        scrollStopped = true;
+        stopSound();
+      }
+    }
+  }, { passive: true });
+
+  // Stop on chatbot interaction
+  var chatbotObserver = new MutationObserver(function() {
+    var widget = document.querySelector('elevenlabs-convai');
+    if (widget && widget.shadowRoot) {
+      var btn = widget.shadowRoot.querySelector('button');
+      if (btn) {
+        btn.addEventListener('click', stopSound, { once: true });
+        chatbotObserver.disconnect();
+      }
+    }
+  });
+  chatbotObserver.observe(document.body, { childList: true, subtree: true });
+  document.getElementById('elevenlabs-widget-wrapper') &&
+    document.getElementById('elevenlabs-widget-wrapper').addEventListener('click', stopSound, { once: true });
+
+  tick();
+})();
+</script>
 </body>
 </html>
