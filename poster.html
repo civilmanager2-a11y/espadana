@@ -305,6 +305,14 @@
 
 <script>
 (function () {
+  /* ── Iframe / embed detection ── */
+  var isEmbed = (window.self !== window.top);
+  if (isEmbed) {
+    document.querySelector('.close-btn').style.display = 'none';
+    document.querySelector('.poster-sway-wrap').style.animation = 'none';
+    document.getElementById('cdOverlay').style.display = 'none';
+  }
+
   /* ── Responsive scale — fit 1024×1820 canvas into viewport ── */
   function applyScale() {
     var vw = document.documentElement.clientWidth  || window.innerWidth  || 0;
@@ -379,9 +387,11 @@
     document.removeEventListener('click', enableSound);
     document.removeEventListener('keydown', enableSound);
   }
-  document.addEventListener('click', enableSound);
-  document.addEventListener('keydown', enableSound);
-  tick();
+  if (!isEmbed) {
+    document.addEventListener('click', enableSound);
+    document.addEventListener('keydown', enableSound);
+  }
+  if (!isEmbed) tick();
 })();
 </script>
 </body>

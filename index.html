@@ -250,6 +250,20 @@
     width: 100%;
     display: block;
   }
+  .poster-mini-frame {
+    width: 100%;
+    overflow: hidden;
+    display: block;
+    border-radius: 18px 18px 0 0;
+  }
+  .poster-mini-frame iframe {
+    border: none;
+    display: block;
+    width: 1024px;
+    height: 1820px;
+    transform-origin: top left;
+    pointer-events: none;
+  }
   .hero-poster-overlay {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -1065,7 +1079,9 @@
   <div class="hero-poster-wrap" id="heroPosterWrap">
     <img src="assets/pushpin.png" alt="" class="hero-poster-pin" id="posterPin">
     <a class="hero-poster-card" id="posterCard" href="poster.html" target="_blank" rel="noopener" title="برای مشاهده تمام‌صفحه کلیک کنید">
-      <img src="assets/spadana-poster.jpg" alt="پوستر فروش ویژه سازه‌های پشت‌بام اسپادانا">
+      <div class="poster-mini-frame" id="posterMiniFrame">
+        <iframe id="posterIframe" src="poster.html" scrolling="no" tabindex="-1" title="پوستر فروش ویژه اسپادانا"></iframe>
+      </div>
       <div class="hero-poster-overlay">
         <div class="hero-poster-cd-label">⏳ پایان قیمت ویژه تا</div>
         <div class="hero-poster-countdown" id="cdTimer">
@@ -2024,6 +2040,28 @@ function submitForm() {
     document.getElementById('elevenlabs-widget-wrapper').addEventListener('click', stopSound, { once: true });
 
   tick();
+})();
+</script>
+
+<!-- Scale mini poster iframe to fit card width -->
+<script>
+(function () {
+  function scaleMini() {
+    var frame = document.getElementById('posterMiniFrame');
+    var iframe = document.getElementById('posterIframe');
+    if (!frame || !iframe) return;
+    var w = frame.offsetWidth;
+    if (!w) return;
+    var scale = w / 1024;
+    iframe.style.transform = 'scale(' + scale + ')';
+    frame.style.height = Math.round(1820 * scale) + 'px';
+  }
+  scaleMini();
+  window.addEventListener('resize', scaleMini);
+  /* Re-run after fonts load (layout may shift) */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(scaleMini);
+  }
 })();
 </script>
 </body>
