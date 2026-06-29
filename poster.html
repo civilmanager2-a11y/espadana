@@ -13,112 +13,123 @@
     background: #05080f;
     font-family: 'Vazirmatn', sans-serif;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     overflow: auto;
-    gap: 0;
   }
+
+  /* wrapper sizes exactly to the image — no extra space */
   .poster-wrap {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 20px 0;
-    max-width: 100vw;
+    display: inline-block;
+    line-height: 0;          /* removes gap below inline image */
+    padding: 20px;
   }
+
   .poster-img {
-    max-width: 100%;
-    max-height: calc(100vh - 140px);
+    display: block;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 40px);
     object-fit: contain;
     border-radius: 20px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.85), 0 0 0 2px rgba(255,184,0,0.35);
-    display: block;
   }
-  /* Countdown bar below poster */
-  .cd-bar {
-    width: 100%;
-    max-width: 640px;
-    background: linear-gradient(135deg, rgba(15,30,60,0.95), rgba(8,16,36,0.98));
-    border: 1.5px solid rgba(255,184,0,0.4);
-    border-top: none;
-    border-radius: 0 0 20px 20px;
-    padding: 14px 24px 16px;
+
+  /* Countdown overlaid INSIDE the image — above phone numbers */
+  /* Original design: countdown at top:1477/1820 = 81.2% → bottom:18.8% */
+  .cd-overlay {
+    position: absolute;
+    bottom: 19%;
+    left: 20px; right: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    gap: 6px;
+    /* subtle dark gradient so numbers are readable */
+    background: radial-gradient(ellipse 80% 100% at 50% 60%, rgba(4,7,20,0.72), transparent);
+    padding: 10px 0 8px;
+    pointer-events: none;
   }
+
   .cd-label {
-    font-size: 13px;
+    font-size: clamp(10px, 1.8vw, 14px);
     font-weight: 700;
-    color: rgba(255,200,80,0.85);
-    white-space: nowrap;
+    color: #FFC53D;
+    letter-spacing: .3px;
+    line-height: 1;
   }
+
   .cd-units {
     display: flex;
-    gap: 8px;
-    align-items: center;
+    gap: clamp(4px, 1vw, 8px);
+    align-items: flex-start;
     direction: ltr;
   }
+
   .cd-unit {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
   }
+
   .cd-digit {
-    font-size: 32px;
+    font-size: clamp(20px, 4.5vw, 46px);
     font-weight: 900;
-    color: #FFB800;
-    background: rgba(255,184,0,0.1);
-    border: 1.5px solid rgba(255,184,0,0.3);
-    border-radius: 10px;
-    width: 60px;
-    text-align: center;
-    line-height: 1.25;
-    padding: 4px 0;
-    transition: color 0.08s;
-  }
-  .cd-digit.tick { color: #fff; }
-  .cd-lbl { font-size: 10px; color: rgba(255,200,80,0.6); font-weight: 600; }
-  .cd-sep {
-    font-size: 28px;
-    font-weight: 900;
-    color: rgba(255,184,0,0.45);
+    color: #FFD451;
+    text-shadow: 0 0 16px rgba(255,190,40,.9), 0 0 34px rgba(255,170,20,.55);
     line-height: 1;
-    margin-bottom: 14px;
+    min-width: clamp(32px, 6vw, 70px);
+    text-align: center;
+    transition: color .08s;
   }
+  .cd-digit.tick { color: #fff; text-shadow: 0 0 24px rgba(255,255,255,.9); }
+
+  .cd-lbl {
+    font-size: clamp(8px, 1.2vw, 12px);
+    color: rgba(200,215,240,.7);
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .cd-sep {
+    font-size: clamp(18px, 4vw, 38px);
+    font-weight: 900;
+    color: rgba(255,196,40,.5);
+    line-height: 1;
+    margin-top: 2px;
+  }
+
   .close-btn {
     position: fixed;
-    top: 14px;
-    left: 14px;
+    top: 14px; left: 14px;
     width: 40px; height: 40px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,.1);
+    border: 1.5px solid rgba(255,255,255,.2);
     color: #fff;
     font-size: 20px;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     backdrop-filter: blur(6px);
-    transition: background 0.2s;
+    transition: background .2s;
     text-decoration: none;
-    z-index: 100;
+    z-index: 200;
   }
-  .close-btn:hover { background: rgba(255,255,255,0.2); }
-  @media (max-width: 500px) {
-    .cd-digit { font-size: 22px; width: 44px; }
-    .cd-sep { font-size: 20px; }
-  }
+  .close-btn:hover { background: rgba(255,255,255,.22); }
 </style>
 </head>
 <body>
 <a class="close-btn" href="javascript:window.close()" title="بستن">✕</a>
+
 <div class="poster-wrap">
-  <img class="poster-img" src="assets/spadana-poster.jpg" alt="پوستر فروش ویژه سازه‌های پشت‌بام اسپادانا">
-  <div class="cd-bar">
-    <div class="cd-label">⏳ پایان قیمت ویژه تا:</div>
+  <img class="poster-img" id="posterImg"
+       src="assets/spadana-poster.jpg"
+       alt="پوستر فروش ویژه سازه‌های پشت‌بام اسپادانا">
+
+  <!-- Countdown overlay — sits inside the image, above phone numbers -->
+  <div class="cd-overlay">
+    <div class="cd-label">⏳ پایان فروش ویژه تا</div>
     <div class="cd-units">
       <div class="cd-unit">
         <div class="cd-digit" id="cd-d">۳۰</div>
@@ -144,78 +155,95 @@
 </div>
 
 <script>
-(function() {
-  var DEADLINE = new Date('2026-07-30T23:59:59').getTime();
-  var audioCtx = null;
-  var soundEnabled = false;
-  var lastSec = -1;
+(function () {
+  /* ── Position overlay precisely using image's rendered size ── */
+  function positionOverlay() {
+    var img = document.getElementById('posterImg');
+    var overlay = document.querySelector('.cd-overlay');
+    var wrap = document.querySelector('.poster-wrap');
+    if (!img.naturalHeight) return;
 
-  function toFa(n, pad) {
-    return String(n).padStart(pad || 2, '0').replace(/[0-9]/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+    /* Rendered image rect relative to wrapper */
+    var iRect = img.getBoundingClientRect();
+    var wRect = wrap.getBoundingClientRect();
+
+    var relTop  = iRect.top  - wRect.top;   /* top of image inside wrapper */
+    var relLeft = iRect.left - wRect.left;
+    var imgH    = iRect.height;
+    var imgW    = iRect.width;
+
+    /* Original: countdown at top:1477 in 1820px → 81.2% from top = 18.8% from bottom */
+    var fromBottom = imgH * 0.188;
+
+    overlay.style.position = 'absolute';
+    overlay.style.left     = relLeft + 'px';
+    overlay.style.right    = (wRect.width - relLeft - imgW) + 'px';
+    overlay.style.bottom   = (wRect.height - relTop - imgH + fromBottom) + 'px';
+    overlay.style.width    = imgW + 'px';
   }
 
+  var img = document.getElementById('posterImg');
+  if (img.complete) positionOverlay();
+  img.addEventListener('load', positionOverlay);
+  window.addEventListener('resize', positionOverlay);
+
+  /* ── Countdown ── */
+  var DEADLINE = new Date('2026-07-30T23:59:59').getTime();
+  var audioCtx = null, soundEnabled = false, lastSec = -1;
+
+  function toFa(n) {
+    return String(n).padStart(2,'0').replace(/[0-9]/g, function(d){ return '۰۱۲۳۴۵۶۷۸۹'[d]; });
+  }
   function getCtx() {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     return audioCtx;
   }
-
   function playTick(urgent) {
     try {
-      var ctx = getCtx();
-      var osc = ctx.createOscillator();
-      var gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.frequency.value = urgent ? 1200 : 880;
-      osc.type = 'sine';
+      var ctx=getCtx(), o=ctx.createOscillator(), g=ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = urgent ? 1200 : 880; o.type = 'sine';
       var dur = urgent ? 0.18 : 0.12;
-      gain.gain.setValueAtTime(urgent ? 0.28 : 0.18, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
-      osc.start(ctx.currentTime); osc.stop(ctx.currentTime + dur);
+      g.gain.setValueAtTime(urgent ? 0.28 : 0.18, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+      o.start(ctx.currentTime); o.stop(ctx.currentTime + dur);
     } catch(e) {}
   }
-
   function playDing() {
     try {
-      var ctx = getCtx();
-      [523, 659, 784].forEach(function(f, i) {
-        var o = ctx.createOscillator(), g = ctx.createGain();
+      var ctx=getCtx();
+      [523,659,784].forEach(function(f,i){
+        var o=ctx.createOscillator(), g=ctx.createGain();
         o.connect(g); g.connect(ctx.destination);
-        o.frequency.value = f; o.type = 'sine';
-        var t = ctx.currentTime + i * 0.18;
-        g.gain.setValueAtTime(0.3, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + 0.6);
-        o.start(t); o.stop(t + 0.6);
+        o.frequency.value=f; o.type='sine';
+        var t=ctx.currentTime+i*0.18;
+        g.gain.setValueAtTime(0.3,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.6);
+        o.start(t); o.stop(t+0.6);
       });
     } catch(e) {}
   }
-
   function tick() {
     var diff = DEADLINE - Date.now();
     if (diff <= 0) {
-      ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){ document.getElementById(id).textContent = '۰۰'; });
+      ['cd-d','cd-h','cd-m','cd-s'].forEach(function(id){ document.getElementById(id).textContent='۰۰'; });
       if (soundEnabled) playDing();
       return;
     }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var s = Math.floor((diff % 60000) / 1000);
-
+    var d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+        m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
     document.getElementById('cd-d').textContent = toFa(d);
     document.getElementById('cd-h').textContent = toFa(h);
     document.getElementById('cd-m').textContent = toFa(m);
     document.getElementById('cd-s').textContent = toFa(s);
-
     if (soundEnabled && s !== lastSec) {
       lastSec = s;
       var el = document.getElementById('cd-s');
       el.classList.add('tick');
       setTimeout(function(){ el.classList.remove('tick'); }, 80);
-      playTick(Math.floor(diff / 1000) <= 10);
+      playTick(Math.floor(diff/1000) <= 10);
     }
     setTimeout(tick, 500);
   }
-
   function enableSound() {
     if (soundEnabled) return;
     soundEnabled = true;
@@ -225,7 +253,6 @@
   }
   document.addEventListener('click', enableSound);
   document.addEventListener('keydown', enableSound);
-
   tick();
 })();
 </script>
