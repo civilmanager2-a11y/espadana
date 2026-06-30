@@ -309,6 +309,32 @@
     color: rgba(255,255,255,0.4);
     margin-top: 8px;
   }
+  /* ── Live HTML mini-canvas (replaces static JPEG) ── */
+  #heroPosterCanvasWrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #0a1228;
+    border-radius: 18px 18px 0 0;
+  }
+  .poster-canvas-mini {
+    position: absolute;
+    top: 0; left: 0;
+    width: 1024px; height: 1820px;
+    transform-origin: top left;
+    direction: rtl;
+    font-family: 'Vazirmatn', sans-serif;
+    color: #fff;
+    background: linear-gradient(162deg, #0d1937 0%, #0a1228 52%, #070c1c 100%);
+  }
+  @keyframes spadanaPinSway {
+    0%,100% { transform: translateX(-50%) rotate(1.25deg); }
+    50%      { transform: translateX(-50%) rotate(-1.35deg); }
+  }
+  @keyframes spadanaGlow {
+    0%, 100% { opacity: .55; }
+    50%       { opacity: .9; }
+  }
   @media (max-width: 480px) {
     .hero-poster-wrap { display: none; }
   }
@@ -1065,7 +1091,9 @@
   <div class="hero-poster-wrap" id="heroPosterWrap">
     <img src="assets/pushpin.png" alt="" class="hero-poster-pin" id="posterPin">
     <a class="hero-poster-card" id="posterCard" href="poster.html" target="_blank" rel="noopener" title="برای مشاهده تمام‌صفحه کلیک کنید">
-      <img src="assets/spadana-poster.jpg" alt="پوستر فروش ویژه سازه‌های پشت‌بام اسپادانا">
+      <div id="heroPosterCanvasWrap">
+        <div class="poster-canvas-mini" id="heroPosterCanvas"></div>
+      </div>
       <div class="hero-poster-overlay">
         <div class="hero-poster-cd-label">⏳ پایان قیمت ویژه تا</div>
         <div class="hero-poster-countdown" id="cdTimer">
@@ -2024,6 +2052,41 @@ function submitForm() {
     document.getElementById('elevenlabs-widget-wrapper').addEventListener('click', stopSound, { once: true });
 
   tick();
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   Hero mini-canvas — loads poster-content.html (single source
+   of truth for prices/offers) and scales it to fit the card.
+   To update: edit poster-content.html only.
+   ═══════════════════════════════════════════════════════════ */
+(function () {
+  function scaleMini() {
+    var wrap = document.getElementById('heroPosterCanvasWrap');
+    var canvas = document.getElementById('heroPosterCanvas');
+    if (!wrap || !canvas) return;
+    var w = wrap.offsetWidth;
+    if (!w) return;
+    var scale = w / 1024;
+    canvas.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = Math.round(1820 * scale) + 'px';
+  }
+
+  fetch('poster-content.html')
+    .then(function (r) { return r.text(); })
+    .then(function (html) {
+      var canvas = document.getElementById('heroPosterCanvas');
+      if (!canvas) return;
+      canvas.innerHTML = html;
+      /* Remove the poster's own countdown overlay — index.html has its own */
+      var cd = canvas.querySelector('#cdOverlay');
+      if (cd) cd.parentNode.removeChild(cd);
+      /* Remove the internal pushpin — the external one above the card is used */
+      var pin = canvas.querySelector('img[alt="پونز"]');
+      if (pin) pin.parentNode.removeChild(pin);
+      scaleMini();
+      window.addEventListener('resize', scaleMini);
+    })
+    .catch(function () { /* file server not running — silently skip */ });
 })();
 </script>
 
