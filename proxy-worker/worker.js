@@ -2,7 +2,14 @@
  * Cloudflare Worker — Full Proxy for ElevenLabs (HTTP + WebSocket)
  * Handles both REST config fetches and WebSocket voice connections
  * so Iranian users can use the chatbot without VPN.
+ *
+ * Also handles POST /api/contact — forwards form submissions to the n8n
+ * webhook. Set BOOKING_WEBHOOK_URL in .dev.vars (local) or Worker env vars
+ * (staging) to override; the production URL is the hardcoded fallback so no
+ * env var is needed in production.
  */
+
+const PRODUCTION_WEBHOOK_URL = 'https://espadana.app.n8n.cloud/webhook/espadana-contact';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -21,12 +28,43 @@ function getTargetHost(url) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const url = new URL(request.url);
 
     // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: CORS_HEADERS });
+    }
+
+    // ── Contact form → n8n webhook ────────────────────────────────────
+    if (url.pathname === '/api/contact' && request.method === 'POST') {
+      const webhookUrl = (env && env.BOOKING_WEBHOOK_URL) || PRODUCTION_WEBHOOK_URL;
+      let body;
+      try {
+        body = await request.json();
+      } catch {
+        return new Response(JSON.stringify({ ok: false, error: 'Invalid JSON' }), {
+          status: 400,
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+        });
+      }
+      try {
+        const upstream = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const text = await upstream.text();
+        return new Response(text, {
+          status: upstream.ok ? 200 : 502,
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+        });
+      } catch (err) {
+        return new Response(JSON.stringify({ ok: false, error: err.message }), {
+          status: 502,
+          headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
+        });
+      }
     }
 
     const upgradeHeader = request.headers.get('Upgrade');

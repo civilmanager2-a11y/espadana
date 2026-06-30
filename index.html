@@ -1650,6 +1650,10 @@
           <input type="text" id="f-city" placeholder="شهر محل سکونت شما">
         </div>
         <div class="form-group">
+          <label>آدرس ایمیل <span style="color:var(--gray-600);font-size:12px;font-weight:400;">(اختیاری — برای ارسال تأییدیه)</span></label>
+          <input type="email" id="f-email" placeholder="example@email.com" dir="ltr">
+        </div>
+        <div class="form-group">
           <label>نوع مصرف <span>*</span></label>
           <select id="f-type">
             <option value="">— انتخاب کنید —</option>
@@ -1820,36 +1824,47 @@ document.getElementById('consume-slider').addEventListener('input', calc);
 document.getElementById('rate-slider').addEventListener('input', calc);
 calc();
 
-function submitForm() {
-  const name = document.getElementById('f-name').value.trim();
+async function submitForm() {
+  const name  = document.getElementById('f-name').value.trim();
   const phone = document.getElementById('f-phone').value.trim();
-  const city = document.getElementById('f-city').value.trim();
-  const type = document.getElementById('f-type').value;
+  const city  = document.getElementById('f-city').value.trim();
+  const type  = document.getElementById('f-type').value;
+  const email = (document.getElementById('f-email') || {}).value?.trim() || '';
   const errEl = document.getElementById('form-error');
+  const btn   = document.querySelector('.form-submit');
 
   if (!name || !phone || !city || !type) {
+    errEl.textContent = 'لطفاً تمام فیلدهای ستاره‌دار را پر کنید.';
     errEl.style.display = 'block';
     return;
   }
   errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = '⏳ در حال ارسال...';
 
-  // Populate success state
-  document.getElementById('s-name').textContent = name;
-  document.getElementById('s-phone').textContent = phone;
-  document.getElementById('s-city').textContent = city;
-
-  // Switch views
-  document.getElementById('form-body').style.display = 'none';
-  document.getElementById('success-msg').classList.add('show');
-
-  // Log to console (replace with real endpoint as needed)
-  // Save to localStorage
   try {
-    const leads = JSON.parse(localStorage.getItem("espadana_leads") || "[]");
-    leads.push({ name, phone, city, type, time: new Date().toISOString() });
-    localStorage.setItem("espadana_leads", JSON.stringify(leads));
-  } catch(e) {}
-  console.log("Lead saved:", { name, phone, city, type });
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, city, type, email })
+    });
+
+    if (!res.ok) throw new Error('server_error');
+
+    // Populate success state
+    document.getElementById('s-name').textContent  = name;
+    document.getElementById('s-phone').textContent = phone;
+    document.getElementById('s-city').textContent  = city;
+
+    document.getElementById('form-body').style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+
+  } catch {
+    errEl.textContent = '⚠️ خطا در ارسال درخواست. لطفاً دوباره تلاش کنید یا مستقیم تماس بگیرید.';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = '☎️ درخواست مشاوره رایگان — همین الان ثبت کنید';
+  }
 }
 </script>
 
