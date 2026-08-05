@@ -215,12 +215,26 @@
 
   /* NEW SPECIAL-SALE BANNER — centered in the suggested hero slot */
   .hero-special-offer {
-    flex: 0 1 520px;
-    width: min(520px, 30vw);
+    flex: 0 1 570px;
+    width: min(570px, 33vw);
     position: relative;
     z-index: 4;
     align-self: center;
+    padding-top: 2px;
+    perspective: 800px;
     filter: drop-shadow(0 22px 42px rgba(0,0,0,.58));
+  }
+  .hero-special-offer-pin {
+    position: absolute;
+    z-index: 10;
+    top: -18px;
+    left: 50%;
+    width: 48px;
+    transform: translateX(-50%);
+    transform-origin: 50% 0;
+    pointer-events: none;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,.6));
+    animation: pinSway 4.6s ease-in-out infinite;
   }
   .hero-special-offer-link {
     position: relative;
@@ -235,6 +249,8 @@
       0 0 22px rgba(255,184,0,.34),
       inset 0 0 20px rgba(255,184,0,.08);
     transition: transform .25s ease, box-shadow .25s ease;
+    transform-origin: 50% 0;
+    animation: posterSway 5.4s ease-in-out infinite;
   }
   .hero-special-offer-link:hover,
   .hero-special-offer-link:focus-visible {
@@ -1098,11 +1114,13 @@
   }
   @media (min-width: 769px) and (max-width: 1280px) {
     .hero { flex-wrap: wrap; justify-content: center; gap: 32px; padding-inline: 3%; }
-    .hero-special-offer { width: min(360px, 28vw); }
+    .hero-special-offer { width: min(400px, 31vw); }
     .hero-poster-wrap { width: min(270px, 23vw); }
     .hero-content { flex: 1 1 100%; max-width: 760px; }
   }
   @media (prefers-reduced-motion: reduce) {
+    .hero-special-offer-link,
+    .hero-special-offer-pin,
     .hero-special-offer-link::after { animation: none; }
   }
   @media (max-width: 480px) {
@@ -1183,6 +1201,7 @@
 
   <!-- SPECIAL-SALE BANNER — suggested center placement -->
   <div class="hero-special-offer" aria-label="بنر فروش ویژه سازه‌های نیروگاهی خورشیدی">
+    <img src="assets/pushpin.png" alt="" class="hero-special-offer-pin" aria-hidden="true">
     <span class="hero-special-offer-badge">✨ فروش ویژه سازه نیروگاهی</span>
     <a
       class="hero-special-offer-link"
