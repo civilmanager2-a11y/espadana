@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#020c18">
+  <title>سازه‌های نیروگاهی خورشیدی اسپادانا</title>
+
+  <style>
+    :root {
+      --poster-width: 1149;
+      --poster-height: 1369;
+      --page-bg: #020914;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 15%, #0a2344 0, var(--page-bg) 52%, #00050b 100%);
+    }
+
+    .poster {
+      position: relative;
+      container-type: inline-size;
+      width: min(100%, 1149px);
+      aspect-ratio: var(--poster-width) / var(--poster-height);
+      overflow: hidden;
+      background: #020c18;
+      box-shadow:
+        0 28px 90px rgb(0 0 0 / 60%),
+        0 0 0 1px rgb(231 174 37 / 20%);
+    }
+
+    .poster__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .mw-glow {
+      position: absolute;
+      z-index: 2;
+      top: 11.85%;
+      left: 1.25%;
+      width: 22%;
+      height: 17.8%;
+      overflow: hidden;
+      pointer-events: none;
+      border: .16cqw solid #f5c63d;
+      border-radius: 1.25cqw;
+      box-shadow:
+        0 0 .7cqw #ffd85c,
+        0 0 1.8cqw rgb(255 190 22 / 82%),
+        0 0 3.5cqw rgb(255 162 0 / 42%),
+        inset 0 0 1.6cqw rgb(255 198 45 / 20%);
+      animation: gold-pulse 2.4s ease-in-out infinite;
+    }
+
+    .mw-glow::after,
+    .special-sale__title::after,
+    .sale-row__price::after {
+      content: "";
+      position: absolute;
+      top: -40%;
+      bottom: -40%;
+      left: -45%;
+      width: 22%;
+      transform: skewX(-20deg);
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgb(255 255 255 / 90%), transparent);
+      filter: blur(.12cqw);
+      animation: shine-sweep 3.2s ease-in-out infinite;
+    }
+
+    /* لینک‌های نامرئی، هم‌اندازه با قسمت‌های قابل کلیک بنر */
+    .hotspot {
+      position: absolute;
+      z-index: 2;
+      display: block;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .hotspot:focus-visible {
+      box-shadow: 0 0 0 4px #fff, 0 0 0 8px #d9a519;
+    }
+
+    .hotspot--site {
+      left: 35%;
+      bottom: 4.4%;
+      width: 31%;
+      height: 3.1%;
+    }
+
+    .hotspot--ble {
+      left: 35%;
+      bottom: 0.7%;
+      width: 31%;
+      height: 3.1%;
+    }
+
+    .hotspot--phone-1 {
+      left: 4.5%;
+      bottom: 4.5%;
+      width: 27%;
+      height: 3.3%;
+    }
+
+    .hotspot--phone-2 {
+      left: 4.5%;
+      bottom: 0.8%;
+      width: 27%;
+      height: 3.3%;
+    }
+
+    /* بخش فروش ویژه به‌صورت HTML واقعی و قابل ویرایش */
+    .special-sale {
+      position: absolute;
+      z-index: 3;
+      left: 1.35%;
+      right: 1.35%;
+      top: 61.9%;
+      height: 29.4%;
+      direction: rtl;
+      color: #090909;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    .special-sale__title {
+      position: absolute;
+      z-index: 2;
+      top: -2.3cqw;
+      left: 50%;
+      width: 19.5%;
+      min-height: 3.3cqw;
+      display: grid;
+      place-items: center;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 2.1cqw;
+      font-weight: 900;
+      line-height: 1;
+      text-shadow: 0 1px 2px #680000;
+      background: linear-gradient(180deg, #d90808 0%, #9d0000 54%, #740000 100%);
+      box-shadow: 0 5px 8px rgb(0 0 0 / 45%);
+      clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
+      overflow: hidden;
+      animation: red-gold-pulse 2.2s ease-in-out infinite;
+    }
+
+    .special-sale__table {
+      height: 100%;
+      overflow: hidden;
+      border: .18cqw solid #d2d2d2;
+      border-radius: 1.25cqw;
+      background: #efefef;
+      box-shadow: 0 0 1.2cqw rgb(0 0 0 / 35%);
+    }
+
+    .sale-row {
+      display: grid;
+      grid-template-columns: 18.5% 40.5% 16% 25%;
+      height: 25%;
+      direction: rtl;
+      border-bottom: .12cqw solid #cacaca;
+      background: linear-gradient(90deg, #e1e1e1 0%, #fafafa 26%, #f2f2f2 72%, #e5e5e5 100%);
+    }
+
+    .sale-row:last-child { border-bottom: 0; }
+
+    .sale-row > * {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-left: .1cqw solid #d2d2d2;
+    }
+
+    .sale-row > *:last-child { border-left: 0; }
+
+    .sale-row__photo {
+      background-image: url("./espadana-banner.png");
+      background-repeat: no-repeat;
+      background-size: 540% auto;
+      background-position-x: 99%;
+      box-shadow: inset 0 0 0 .65cqw #f4f4f4;
+    }
+
+    .sale-row:nth-child(1) .sale-row__photo { background-position-y: 67.5%; }
+    .sale-row:nth-child(2) .sale-row__photo { background-position-y: 75.5%; }
+    .sale-row:nth-child(3) .sale-row__photo { background-position-y: 83.5%; }
+    .sale-row:nth-child(4) .sale-row__photo { background-position-y: 91.5%; }
+
+    .sale-row__description {
+      position: relative;
+      flex-direction: column;
+      gap: .35cqw;
+      padding: .6cqw 1.8cqw .5cqw 1cqw;
+      font-size: 1.35cqw;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .sale-row__description::before {
+      content: "";
+      position: absolute;
+      right: .75cqw;
+      width: .95cqw;
+      height: .95cqw;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e0bc54, #aa7906);
+    }
+
+    .sale-row__description em {
+      color: #a00000;
+      font-size: 1.3cqw;
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    .sale-row__weight,
+    .sale-row__price {
+      flex-direction: column;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .sale-row__weight small,
+    .sale-row__price small {
+      margin-bottom: .35cqw;
+      font-size: 1.15cqw;
+      font-weight: 900;
+    }
+
+    .sale-row__weight strong {
+      font-size: 2.5cqw;
+      font-weight: 900;
+    }
+
+    .sale-row__weight span,
+    .sale-row__price span {
+      margin-top: .2cqw;
+      font-size: 1.15cqw;
+      font-weight: 900;
+    }
+
+    .sale-row__price {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(110deg, #edc64c 0%, #d9a926 55%, #f4d669 100%);
+      box-shadow:
+        inset 0 0 1cqw rgb(255 255 255 / 42%),
+        0 0 1.1cqw rgb(255 190 0 / 38%);
+      animation: price-glow 2.4s ease-in-out infinite;
+    }
+
+    .sale-row:nth-child(2) .sale-row__price { animation-delay: .25s; }
+    .sale-row:nth-child(3) .sale-row__price { animation-delay: .5s; }
+    .sale-row:nth-child(4) .sale-row__price { animation-delay: .75s; }
+
+    .sale-row:nth-child(2) .sale-row__price::after { animation-delay: .3s; }
+    .sale-row:nth-child(3) .sale-row__price::after { animation-delay: .6s; }
+    .sale-row:nth-child(4) .sale-row__price::after { animation-delay: .9s; }
+
+    .sale-row__price strong {
+      position: relative;
+      z-index: 1;
+      color: #ae0808;
+      direction: ltr;
+      font-family: "Arial Black", Tahoma, Arial, sans-serif;
+      font-size: 2.7cqw;
+      font-weight: 950;
+      line-height: .95;
+      letter-spacing: -.12cqw;
+      text-shadow: 0 .08cqw .08cqw rgb(80 0 0 / 28%);
+    }
+
+    @keyframes shine-sweep {
+      0%, 18% { left: -45%; opacity: 0; }
+      28% { opacity: 1; }
+      62%, 100% { left: 125%; opacity: 0; }
+    }
+
+    @keyframes gold-pulse {
+      0%, 100% {
+        filter: brightness(1);
+        box-shadow: 0 0 .6cqw #ffd85c, 0 0 1.5cqw rgb(255 190 22 / 72%), 0 0 3cqw rgb(255 162 0 / 35%), inset 0 0 1.2cqw rgb(255 198 45 / 16%);
+      }
+      50% {
+        filter: brightness(1.18);
+        box-shadow: 0 0 1cqw #fff0a3, 0 0 2.4cqw rgb(255 202 51 / 95%), 0 0 4.5cqw rgb(255 145 0 / 58%), inset 0 0 2cqw rgb(255 222 105 / 30%);
+      }
+    }
+
+    @keyframes red-gold-pulse {
+      0%, 100% { filter: brightness(1); box-shadow: 0 5px 8px rgb(0 0 0 / 45%), 0 0 .8cqw rgb(255 185 0 / 45%); }
+      50% { filter: brightness(1.22); box-shadow: 0 5px 8px rgb(0 0 0 / 45%), 0 0 2cqw rgb(255 211 71 / 95%); }
+    }
+
+    @keyframes price-glow {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.18) saturate(1.15); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mw-glow,
+      .special-sale__title,
+      .sale-row__price,
+      .mw-glow::after,
+      .special-sale__title::after,
+      .sale-row__price::after {
+        animation: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0;
+        place-items: start center;
+        background: #020c18;
+      }
+
+      .poster {
+        width: 100%;
+        box-shadow: none;
+      }
+    }
+
+    @media print {
+      @page {
+        size: 1149px 1369px;
+        margin: 0;
+      }
+
+      body {
+        display: block;
+        padding: 0;
+        background: #fff;
+      }
+
+      .poster {
+        width: 1149px;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="poster" aria-label="بنر تبلیغاتی سازه‌های نیروگاهی خورشیدی اسپادانا">
+    <img
+      class="poster__image"
+      src="./assets/espadana-special-sale.png"
+      width="1149"
+      height="1369"
+      alt="بنر اسپادانا؛ تولیدکننده تخصصی سازه‌های نیروگاهی خورشیدی، شامل ویژگی‌ها، قیمت‌ها و اطلاعات تماس"
+      decoding="sync"
+      fetchpriority="high"
+    >
+
+    <div class="mw-glow" aria-hidden="true"></div>
+
+    <section class="special-sale" aria-labelledby="special-sale-title">
+      <h2 class="special-sale__title" id="special-sale-title">فروش ویژه</h2>
+
+      <div class="special-sale__table">
+        <article class="sale-row">
+          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با پایه کوبشی"></div>
+          <div class="sale-row__description">
+            <span>استراکچر نیروگاهی خورشیدی تیپ بایفشیال (رفتـری)</span>
+            <em>گالوانیزه گرم HDG با پایه کوبشی</em>
+          </div>
+          <div class="sale-row__weight"><small>هر مگاوات</small><strong>۳۹</strong><span>تن</span></div>
+          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>۸,۹۵۰,۰۰۰,۰۰۰</strong><span>تومان</span></div>
+        </article>
+
+        <article class="sale-row">
+          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی بدون پایه کوبشی"></div>
+          <div class="sale-row__description">
+            <span>استراکچر نیروگاهی خورشیدی تیپ بایفشیال (رفتـری)</span>
+            <em>گالوانیزه گرم HDG بدون پایه کوبشی</em>
+          </div>
+          <div class="sale-row__weight"><small>هر مگاوات</small><strong>۲۸/۵</strong><span>تن</span></div>
+          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>۶,۵۵۰,۰۰۰,۰۰۰</strong><span>تومان</span></div>
+        </article>
+
+        <article class="sale-row">
+          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با سیستم دفنی بتنی"></div>
+          <div class="sale-row__description">
+            <span>استراکچر خورشیدی نیروگاهی تیپ بایفشیال (رفتـری)</span>
+            <em>گالوانیزه گرم HDG سیستم دفنی بتنی</em>
+          </div>
+          <div class="sale-row__weight"><small>هر مگاوات</small><strong>۳۰</strong><span>تن</span></div>
+          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>۷,۳۵۰,۰۰۰,۰۰۰</strong><span>تومان</span></div>
+        </article>
+
+        <article class="sale-row">
+          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با گالوانیزه فابریک"></div>
+          <div class="sale-row__description">
+            <span>استراکچر خورشیدی نیروگاهی تیپ بایفشیال (رفتـری)</span>
+            <em>گالوانیزه فابریک کارخانه Z200 سیستم دفنی بتنی</em>
+          </div>
+          <div class="sale-row__weight"><small>هر مگاوات</small><strong>۳۰</strong><span>تن</span></div>
+          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>۶,۸۵۰,۰۰۰,۰۰۰</strong><span>تومان</span></div>
+        </article>
+      </div>
+    </section>
+
+    <a class="hotspot hotspot--site" href="https://espadanagroup.com/" target="_blank" rel="noopener" aria-label="وب‌سایت اسپادانا"></a>
+    <a class="hotspot hotspot--ble" href="https://ble.ir/ESPADANACO" target="_blank" rel="noopener" aria-label="کانال بله اسپادانا"></a>
+    <a class="hotspot hotspot--phone-1" href="tel:+982182809833" aria-label="تماس با شماره ۰۲۱۸۲۸۰۹۸۳۳"></a>
+    <a class="hotspot hotspot--phone-2" href="tel:+989122504115" aria-label="تماس با شماره ۰۹۱۲۲۵۰۴۱۱۵"></a>
+  </main>
+</body>
+</html>
