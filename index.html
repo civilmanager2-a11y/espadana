@@ -190,6 +190,168 @@
     font-weight: 700 !important;
   }
 
+  /* PERSONNEL TOOLS — glass dropdown below the company logo */
+  .personnel-tools {
+    position: absolute;
+    top: 12px;
+    right: 5%;
+    width: 238px;
+    z-index: 30;
+    direction: rtl;
+  }
+  .personnel-tools-toggle {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba(255,255,255,.42);
+    border-radius: 15px;
+    padding: 10px 16px;
+    overflow: hidden;
+    cursor: pointer;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,184,0,.12) 48%, rgba(10,35,62,.38));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.5),
+      inset 0 -1px 0 rgba(255,184,0,.16),
+      0 8px 26px rgba(0,0,0,.28),
+      0 0 18px rgba(255,184,0,.42);
+    backdrop-filter: blur(16px) saturate(145%);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    animation: personnelGlow 2.8s ease-in-out infinite;
+  }
+  .personnel-tools-toggle::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -80% -35%;
+    background: linear-gradient(110deg, transparent 36%, rgba(255,255,255,.7) 49%, transparent 62%);
+    transform: translateX(65%) rotate(5deg);
+    animation: personnelShine 3.6s ease-in-out infinite;
+  }
+  .personnel-tools-toggle:hover,
+  .personnel-tools-toggle:focus-visible,
+  .personnel-tools.open .personnel-tools-toggle {
+    transform: translateY(-2px);
+    border-color: rgba(255,210,82,.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.62),
+      0 10px 30px rgba(0,0,0,.34),
+      0 0 28px rgba(255,184,0,.72);
+    outline: none;
+  }
+  .personnel-tools-icon {
+    width: 23px;
+    height: 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #08203a;
+    background: linear-gradient(145deg, #ffe68a, var(--sun));
+    box-shadow: 0 0 14px rgba(255,184,0,.55);
+    flex: 0 0 auto;
+  }
+  .personnel-tools-chevron {
+    width: 9px;
+    height: 9px;
+    border-left: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg) translateY(-2px);
+    transition: transform .28s ease;
+    opacity: .82;
+  }
+  .personnel-tools.open .personnel-tools-chevron {
+    transform: rotate(135deg) translate(-2px, 0);
+  }
+  .personnel-tools-menu {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transform: translateY(-8px) scale(.98);
+    transform-origin: top center;
+    pointer-events: none;
+    transition: grid-template-rows .34s ease, opacity .24s ease, transform .34s ease;
+  }
+  .personnel-tools.open .personnel-tools-menu {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  .personnel-tools-menu-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .personnel-tools-links {
+    display: grid;
+    gap: 7px;
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,.24);
+    border-radius: 15px;
+    background: linear-gradient(145deg, rgba(8,31,55,.88), rgba(15,39,68,.72));
+    box-shadow: 0 14px 34px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.14);
+    backdrop-filter: blur(18px) saturate(135%);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+  }
+  .personnel-tool-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 54px;
+    padding: 9px 11px;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 11px;
+    background: rgba(255,255,255,.07);
+    transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .personnel-tool-link:hover,
+  .personnel-tool-link:focus-visible {
+    transform: translateX(-3px);
+    color: #fff;
+    background: rgba(255,184,0,.17);
+    border-color: rgba(255,184,0,.58);
+    box-shadow: 0 0 17px rgba(255,184,0,.18);
+    outline: none;
+  }
+  .personnel-tool-link-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    border-radius: 10px;
+    color: var(--sun);
+    background: rgba(255,184,0,.12);
+    border: 1px solid rgba(255,184,0,.3);
+    font-size: 18px;
+  }
+  .personnel-tool-link-copy { display: flex; flex-direction: column; line-height: 1.45; }
+  .personnel-tool-link-copy strong { font-size: 13px; font-weight: 800; }
+  .personnel-tool-link-copy small { color: rgba(232,240,250,.66); font-size: 10.5px; font-weight: 400; }
+  @keyframes personnelGlow {
+    0%, 100% { filter: drop-shadow(0 0 2px rgba(255,184,0,.22)); }
+    50% { filter: drop-shadow(0 0 9px rgba(255,184,0,.62)); }
+  }
+  @keyframes personnelShine {
+    0%, 56% { transform: translateX(70%) rotate(5deg); opacity: 0; }
+    66% { opacity: .8; }
+    84%, 100% { transform: translateX(-70%) rotate(5deg); opacity: 0; }
+  }
+
   /* HERO */
   .hero {
     background: linear-gradient(135deg, rgba(2,8,16,0.92) 0%, rgba(8,21,37,0.85) 60%, rgba(6,14,26,0.9) 100%),
@@ -1111,6 +1273,15 @@
       flex-basis: auto;
       margin-top: 24px;
     }
+    .personnel-tools {
+      top: 10px;
+      right: 5%;
+      left: auto;
+      width: min(238px, 90%);
+      max-width: none;
+      margin: 0;
+    }
+    .personnel-tools-toggle { min-height: 48px; }
   }
   @media (min-width: 769px) and (max-width: 1280px) {
     .hero { flex-wrap: wrap; justify-content: center; gap: 32px; padding-inline: 3%; }
@@ -1121,7 +1292,9 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-special-offer-link,
     .hero-special-offer-pin,
-    .hero-special-offer-link::after { animation: none; }
+    .hero-special-offer-link::after,
+    .personnel-tools-toggle,
+    .personnel-tools-toggle::before { animation: none; }
   }
   @media (max-width: 480px) {
     .footer-grid { grid-template-columns: 1fr; }
@@ -1160,6 +1333,44 @@
   <div class="hero-grid"></div>
   <div class="hero-neon">
     <div class="hero-neon-grid"></div>
+  </div>
+  <div class="personnel-tools" id="personnel-tools">
+    <button
+      type="button"
+      class="personnel-tools-toggle"
+      id="personnel-tools-toggle"
+      aria-expanded="false"
+      aria-controls="personnel-tools-menu"
+    >
+      <span class="personnel-tools-icon" aria-hidden="true">♙</span>
+      <span>ابزار پرسنل</span>
+      <span class="personnel-tools-chevron" aria-hidden="true"></span>
+    </button>
+    <div class="personnel-tools-menu" id="personnel-tools-menu">
+      <div class="personnel-tools-menu-inner">
+        <div class="personnel-tools-links">
+          <a class="personnel-tool-link" href="https://espadana-invoice-sys.vercel.app/" target="_blank" rel="noopener">
+            <span class="personnel-tool-link-icon" aria-hidden="true">◉</span>
+            <span class="personnel-tool-link-copy">
+              <strong>دسترسی از طریق وب</strong>
+              <small>ورود آنلاین از موبایل، تبلت و رایانه</small>
+            </span>
+          </a>
+          <a
+            class="personnel-tool-link"
+            href="downloads/ESPADANA-INVOICE-SYS-Android-v2.2.apk"
+            download="ESPADANA-INVOICE-SYS-Android-v2.2.apk"
+            type="application/vnd.android.package-archive"
+          >
+            <span class="personnel-tool-link-icon" aria-hidden="true">↓</span>
+            <span class="personnel-tool-link-copy">
+              <strong>دانلود اپلیکیشن اندروید</strong>
+              <small>نسخه ۲٫۲ — فایل نصب APK</small>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="hero-content">
     <div class="hero-badge">
@@ -1882,6 +2093,31 @@
 </footer>
 
 <script>
+// Glass personnel tools dropdown
+(function() {
+  const root = document.getElementById('personnel-tools');
+  const toggle = document.getElementById('personnel-tools-toggle');
+  if (!root || !toggle) return;
+
+  function setOpen(open) {
+    root.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+  }
+
+  toggle.addEventListener('click', function(event) {
+    event.stopPropagation();
+    setOpen(!root.classList.contains('open'));
+  });
+  root.addEventListener('click', function(event) { event.stopPropagation(); });
+  document.addEventListener('click', function() { setOpen(false); });
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+})();
+
 // Neon electricity bolts on hero solar panel grid
 (function() {
   const container = document.querySelector('.hero-neon');
