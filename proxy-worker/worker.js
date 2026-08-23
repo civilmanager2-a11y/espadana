@@ -9,7 +9,7 @@
  * env var is needed in production.
  */
 
-const PRODUCTION_WEBHOOK_URL = 'https://espadana.app.n8n.cloud/webhook/espadana-contact';
+const PRODUCTION_WEBHOOK_URL = 'https://espadana-n8n.onrender.com/webhook/espadana-contact';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -53,6 +53,7 @@ export default {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
+          signal: AbortSignal.timeout(75000),
         });
         const text = await upstream.text();
         return new Response(text, {

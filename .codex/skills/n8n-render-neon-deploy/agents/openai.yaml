@@ -1,0 +1,4 @@
+interface:
+  display_name: "n8n on Render + Neon"
+  short_description: "Deploy and troubleshoot n8n on free Render and Neon"
+  default_prompt: "Use $n8n-render-neon-deploy to deploy or repair an n8n workflow on Render with Neon Postgres."

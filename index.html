@@ -2214,7 +2214,7 @@ async function submitForm() {
   btn.textContent = '⏳ در حال ارسال...';
 
   try {
-    const res = await fetch('https://espadana.app.n8n.cloud/webhook/espadana-contact', {
+    const res = await fetch('https://proxy.espadanagroup.com/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, phone, city, type, email })
