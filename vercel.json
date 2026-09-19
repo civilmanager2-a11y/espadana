@@ -3,5 +3,9 @@
     "api/contact.js": {
       "maxDuration": 90
     }
-  }
+  },
+  "rewrites": [
+    { "source": "/sales", "destination": "https://espadana-sales-network.vercel.app/sales" },
+    { "source": "/sales/:path*", "destination": "https://espadana-sales-network.vercel.app/sales/:path*" }
+  ]
 }
