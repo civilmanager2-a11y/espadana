@@ -342,6 +342,30 @@
   .personnel-tool-link-copy { display: flex; flex-direction: column; line-height: 1.45; }
   .personnel-tool-link-copy strong { font-size: 13px; font-weight: 800; }
   .personnel-tool-link-copy small { color: rgba(232,240,250,.66); font-size: 10.5px; font-weight: 400; }
+  /* دکمهٔ سازمان فروش — کادر نئون سبز */
+  .personnel-tool-link--neon {
+    border-color: rgba(57,255,20,.55);
+    background: rgba(57,255,20,.08);
+    box-shadow: 0 0 14px rgba(57,255,20,.28), inset 0 0 12px rgba(57,255,20,.08);
+    animation: neonPulse 2.2s ease-in-out infinite;
+  }
+  .personnel-tool-link--neon:hover,
+  .personnel-tool-link--neon:focus-visible {
+    transform: translateX(-3px);
+    background: rgba(57,255,20,.16);
+    border-color: rgba(57,255,20,.95);
+    box-shadow: 0 0 24px rgba(57,255,20,.55);
+  }
+  .personnel-tool-link--neon .personnel-tool-link-icon {
+    color: #39ff14;
+    background: rgba(57,255,20,.12);
+    border-color: rgba(57,255,20,.45);
+    text-shadow: 0 0 8px rgba(57,255,20,.7);
+  }
+  @keyframes neonPulse {
+    0%, 100% { box-shadow: 0 0 12px rgba(57,255,20,.22), inset 0 0 10px rgba(57,255,20,.06); }
+    50% { box-shadow: 0 0 22px rgba(57,255,20,.5), inset 0 0 14px rgba(57,255,20,.12); }
+  }
   @keyframes personnelGlow {
     0%, 100% { filter: drop-shadow(0 0 2px rgba(255,184,0,.22)); }
     50% { filter: drop-shadow(0 0 9px rgba(255,184,0,.62)); }
@@ -1366,6 +1390,13 @@
             <span class="personnel-tool-link-copy">
               <strong>دانلود اپلیکیشن اندروید</strong>
               <small>نسخه ۲٫۲ — فایل نصب APK</small>
+            </span>
+          </a>
+          <a class="personnel-tool-link personnel-tool-link--neon" href="https://espadana-sales-network.vercel.app/" target="_blank" rel="noopener">
+            <span class="personnel-tool-link-icon" aria-hidden="true">◆</span>
+            <span class="personnel-tool-link-copy">
+              <strong>سازمان فروش</strong>
+              <small>ورود مدیران فروش به پنل سازمان فروش</small>
             </span>
           </a>
         </div>
