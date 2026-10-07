@@ -1325,94 +1325,80 @@
   }
 </style>
 <style id="shop-banner-css">
-  /* SHOP BANNER — جایگاه تمام‌عرض بالای هیرو (لینک به /shop).
-     برای بنر نهایی کافی است محتوای داخل a.hero-shop-banner را با تصویر بنر جایگزین کنید. */
-  .hero { --shop-banner-h: clamp(128px, 12vw, 176px); padding-top: calc(76px + var(--shop-banner-h) + 28px); }
+  /* SHOP BANNER — بنر متحرک فروشگاه (۱۶۰۰×۵۰۰) در جایگاه تمام‌عرض بالای هیرو؛ کل بنر لینک /shop است */
+  .hero { --shop-banner-w: min(90vw, 1280px); --shop-banner-h: calc(var(--shop-banner-w) * 5 / 16); padding-top: calc(76px + var(--shop-banner-h) + 28px); }
   .nav-links a.nav-shop { color: var(--sun); font-weight: 700; }
   .hero-shop-banner {
     position: absolute;
     z-index: 6;
     top: 72px;
-    left: 5%;
-    right: 5%;
+    left: 50%;
+    width: var(--shop-banner-w);
     height: var(--shop-banner-h);
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 0 clamp(16px, 3vw, 40px);
-    border: 1.5px solid rgba(255,184,0,.7);
-    border-radius: 18px;
+    transform: translateX(-50%);
+    display: block;
     overflow: hidden;
-    color: #f8fbff;
+    border-radius: 18px;
+    background: #03111d;
+    color: #fff;
     text-decoration: none;
-    background:
-      radial-gradient(circle at 12% 50%, rgba(202,255,0,.16), transparent 32%),
-      radial-gradient(circle at 85% 30%, rgba(255,183,3,.14), transparent 30%),
-      linear-gradient(135deg, #030914 0%, #071426 50%, #0d2542 100%);
-    box-shadow: 0 0 0 1px rgba(255,226,123,.12), 0 0 26px rgba(255,184,0,.3), 0 18px 40px rgba(0,0,0,.55);
+    box-shadow: 0 0 0 1px rgba(255,208,42,.35), 0 0 28px rgba(255,157,0,.32), 0 18px 40px rgba(0,0,0,.55);
     transition: transform .25s ease, box-shadow .25s ease;
   }
-  .hero-shop-banner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,183,3,.09) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,183,3,.09) 1px, transparent 1px);
-    background-size: 36px 36px;
-    pointer-events: none;
-  }
-  .hero-shop-banner::after {
-    content: '';
-    position: absolute;
-    top: -30%;
-    bottom: -30%;
-    left: -20%;
-    width: 10%;
-    transform: skewX(-18deg);
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-    animation: shopShine 5s ease-in-out infinite;
-    pointer-events: none;
-  }
-  @keyframes shopShine { 0%, 60% { left: -20%; } 100% { left: 120%; } }
   .hero-shop-banner:hover,
   .hero-shop-banner:focus-visible {
-    transform: translateY(-3px);
-    box-shadow: 0 0 0 2px rgba(255,226,123,.5), 0 0 40px rgba(255,184,0,.55), 0 24px 50px rgba(0,0,0,.65);
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 0 0 2px rgba(255,208,42,.7), 0 0 44px rgba(255,157,0,.55), 0 24px 50px rgba(0,0,0,.65);
     outline: none;
   }
-  .hsb-copy { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-  .hsb-eyebrow { font-size: clamp(11px, 1vw, 13px); color: #caff00; font-weight: 700; }
-  .hsb-title { font-size: clamp(17px, 2.2vw, 30px); font-weight: 900; line-height: 1.4; }
-  .hsb-title em { font-style: normal; color: var(--sun); letter-spacing: .5px; }
-  .hsb-sub { font-size: clamp(11px, 1.05vw, 14px); color: #b6c3d5; }
-  .hsb-products { position: relative; display: flex; align-items: flex-end; height: 88%; gap: 6px; }
-  .hsb-products img { height: 100%; width: auto; filter: drop-shadow(0 10px 16px rgba(0,0,0,.6)); }
-  .hsb-products img:nth-child(2) { height: 86%; }
-  .hsb-products img:nth-child(3) { height: 78%; }
-  .hsb-cta {
-    position: relative;
-    flex-shrink: 0;
-    padding: 12px 22px;
-    border-radius: 12px;
-    background: var(--sun);
-    color: #030914;
-    font-weight: 900;
-    font-size: clamp(13px, 1.2vw, 16px);
-    white-space: nowrap;
+  .hsb-media { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .hsb-poster { display: none; }
+  /* ناحیهٔ فعالِ دکمهٔ «ورود به فروشگاه» که داخل بنر طراحی شده (۷۷.۵٪ تا ۹۶.۵٪ عرض، ۴۹٪ تا ۶۲٪ ارتفاع) */
+  .hsb-cta-hotspot {
+    position: absolute;
+    left: 77.5%;
+    top: 48.6%;
+    width: 19%;
+    height: 13.4%;
+    border-radius: 14px;
+    transition: box-shadow .2s ease, background-color .2s ease;
   }
-  @media (max-width: 768px) {
-    .hero { --shop-banner-h: 150px; padding-top: calc(60px + var(--shop-banner-h) + 24px); }
-    .hero-shop-banner { top: 58px; left: 4%; right: 4%; gap: 10px; padding: 0 14px; }
-    .hsb-sub { display: none; }
-    .hsb-products img:nth-child(3) { display: none; }
-    .hsb-cta { padding: 9px 12px; }
+  .hero-shop-banner:hover .hsb-cta-hotspot,
+  .hero-shop-banner:focus-visible .hsb-cta-hotspot {
+    background-color: rgba(255,255,255,.12);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.75), 0 0 30px rgba(255,208,42,.85);
   }
-  @media (max-width: 480px) {
-    .hsb-products { display: none; }
-  }
+  .hsb-mobile { display: none; }
   @media (prefers-reduced-motion: reduce) {
-    .hero-shop-banner::after { animation: none; }
+    .hsb-video { display: none; }
+    .hsb-poster { display: block; }
+  }
+  @media (max-width: 720px) {
+    .hero { --shop-banner-w: 92vw; --shop-banner-h: 255px; padding-top: calc(60px + var(--shop-banner-h) + 24px); }
+    .hero-shop-banner {
+      top: 58px;
+      display: flex;
+      align-items: center;
+      padding: 24px 20px;
+      border: 2px solid #ff9d00;
+      background: radial-gradient(circle at 80% 20%, rgba(255,157,0,.22), transparent 45%), #03111d;
+      box-shadow: inset 0 0 24px rgba(255,157,0,.16), 0 12px 30px rgba(0,0,0,.5);
+    }
+    .hsb-video, .hsb-poster, .hsb-cta-hotspot { display: none !important; }
+    .hsb-mobile { display: block; width: 100%; text-align: center; }
+    .hsb-mobile strong { display: block; font-size: 25px; line-height: 1.55; color: #fff; }
+    .hsb-mobile strong span { color: #ffd02a; }
+    .hsb-mobile small { display: block; margin: 8px 0 18px; color: #d8e4eb; font-size: 14px; line-height: 1.8; }
+    .hsb-mobile-cta {
+      display: inline-block;
+      padding: 12px 22px;
+      border-radius: 12px;
+      background: linear-gradient(110deg, #ffd02a, #ff9d00);
+      color: #07131d;
+      font-size: 17px;
+      font-weight: 900;
+      box-shadow: 0 0 24px rgba(255,157,0,.42);
+    }
   }
 </style>
 </head>
@@ -1496,19 +1482,34 @@
     </div>
   </div>
   <!-- SHOP BANNER — ورود به فروشگاه اسپادانا (espadanagroup.com/shop) -->
-  <a class="hero-shop-banner" href="/shop" aria-label="ورود به فروشگاه اسپادانا، نماینده رسمی و مرکزی ZINEXX در ایران">
-    <span class="hsb-copy">
-      <span class="hsb-eyebrow">⚡ فروشگاه آنلاین اسپادانا</span>
-      <strong class="hsb-title">اینورتر هیبریدی و باتری لیتیومی <em>ZINEXX</em></strong>
-      <span class="hsb-sub">نماینده رسمی و مرکزی ZINEXX در ایران — خرید آنلاین با فاکتور رسمی و ۳ سال گارانتی</span>
+  <a class="hero-shop-banner" href="/shop" aria-label="ورود به فروشگاه آنلاین اسپادانا؛ خرید تجهیزات خورشیدی ZINEXX با قیمت به‌روز و فاکتور رسمی">
+    <video class="hsb-media hsb-video" muted loop playsinline preload="none" poster="assets/shop/espadana-store-poster.webp" aria-hidden="true">
+      <source src="assets/shop/espadana-store-banner.mp4" type="video/mp4">
+      <img class="hsb-media" src="assets/shop/espadana-store-banner.gif" width="1280" height="400" alt="">
+    </video>
+    <img class="hsb-media hsb-poster" src="assets/shop/espadana-store-poster.webp" width="1600" height="500" alt="ورود به فروشگاه آنلاین اسپادانا — محصولات ZINEXX با قیمت به‌روز، فاکتور رسمی و ۳ سال گارانتی">
+    <span class="hsb-cta-hotspot" aria-hidden="true"></span>
+    <span class="hsb-mobile">
+      <strong>ورود به فروشگاه آنلاین <span>اسپادانا</span></strong>
+      <small>محصولات ZINEXX با قیمت به‌روز، فاکتور رسمی و مشاوره تخصصی</small>
+      <span class="hsb-mobile-cta">ورود به فروشگاه ←</span>
     </span>
-    <span class="hsb-products" aria-hidden="true">
-      <img src="assets/shop/zx-512200-cts.webp" alt="" width="237" height="360">
-      <img src="assets/shop/zx-6ksl-wm.webp" alt="" width="242" height="360">
-      <img src="assets/shop/zx-512314-ng.webp" alt="" width="215" height="360">
-    </span>
-    <span class="hsb-cta">ورود به فروشگاه ←</span>
   </a>
+  <script>
+    // ویدئوی بنر فقط در نمایش دسکتاپ بارگذاری و پخش می‌شود (در موبایل کارت متنی نمایش داده می‌شود).
+    // اگر مرورگر پخش خودکار را مسدود کرد (مثلاً حالت کم‌مصرف)، به‌جای فریم تیره، پوستر بنر نمایش داده می‌شود.
+    (function () {
+      var v = document.querySelector('.hsb-video');
+      if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(max-width: 720px)').matches) return;
+      v.preload = 'auto';
+      var p = v.play && v.play();
+      if (p && p.catch) p.catch(function () {
+        v.style.display = 'none';
+        var img = document.querySelector('.hsb-poster');
+        if (img) img.style.display = 'block';
+      });
+    })();
+  </script>
   <div class="hero-content">
     <div class="hero-badge">
       <span>☀️</span>
