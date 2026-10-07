@@ -6,6 +6,8 @@
   },
   "rewrites": [
     { "source": "/sales", "destination": "https://espadana-sales-network.vercel.app/sales" },
-    { "source": "/sales/:path*", "destination": "https://espadana-sales-network.vercel.app/sales/:path*" }
+    { "source": "/sales/:path*", "destination": "https://espadana-sales-network.vercel.app/sales/:path*" },
+    { "source": "/shop", "destination": "https://espadana-shop.vercel.app/shop" },
+    { "source": "/shop/:path*", "destination": "https://espadana-shop.vercel.app/shop/:path*" }
   ]
 }

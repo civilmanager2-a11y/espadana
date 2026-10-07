@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /shop/account
+Disallow: /shop/admin
+Disallow: /shop/checkout
+Disallow: /shop/cart
+Disallow: /shop/login
+Disallow: /shop/api/
+
+Sitemap: https://espadanagroup.com/shop/sitemap.xml
