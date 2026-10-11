@@ -1,0 +1,8 @@
+/* فونت وزیرمتن (متغیر، وزن ۱۰۰ تا ۹۰۰) از خود سایت — بدون وابستگی به Google Fonts / CDN خارجی */
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/assets/fonts/Vazirmatn-wght.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
