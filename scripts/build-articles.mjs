@@ -1,16 +1,26 @@
-// ساخت صفحات ایستای /articles از content/articles.mjs
+// ساخت صفحات ایستای /articles از content/articles.mjs و مقاله‌های خودکار پادکست (content/podcast/*.json)
 // اجرا: node scripts/build-articles.mjs
-import { mkdirSync, writeFileSync, rmSync, existsSync } from "node:fs";
+import { mkdirSync, writeFileSync, rmSync, existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { CATEGORIES, ARTICLES, NOTE } from "../content/articles.mjs";
-import { REF_IMAGES } from "../content/ref-images.mjs";
+import { CATEGORIES, ARTICLES as MANUAL, NOTE } from "../content/articles.mjs";
+import { REF_IMAGES as MANUAL_REFS } from "../content/ref-images.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "articles");
 const SITE = "https://espadanagroup.com";
 const OWN_CREDIT = "تصویر از آرشیو تصاویر اسپادانا؛ تصویر نمادین است و به رویداد خبر تعلق ندارد.";
 const FA_DIGITS = "۰۱۲۳۴۵۶۷۸۹";
+
+// مقاله‌هایی که پس از هر پادکست خودکار ساخته می‌شوند (iran-solar-podcast → podcast/site_articles.py)
+const PODCAST_DIR = join(ROOT, "content/podcast");
+const PODCAST = existsSync(PODCAST_DIR)
+  ? readdirSync(PODCAST_DIR)
+      .filter((f) => f.endsWith(".json") && !f.startsWith("_"))
+      .map((f) => JSON.parse(readFileSync(join(PODCAST_DIR, f), "utf-8")))
+  : [];
+const ARTICLES = [...MANUAL, ...PODCAST.filter((p) => !MANUAL.some((m) => m.slug === p.slug))];
+const REF_IMAGES = { ...MANUAL_REFS, ...Object.fromEntries(PODCAST.filter((p) => p.refImage).map((p) => [p.slug, p.refImage])) };
 
 const fa = (n) => String(n).replace(/\d/g, (d) => FA_DIGITS[d]);
 const pad = (n) => fa(String(n).padStart(2, "0"));
