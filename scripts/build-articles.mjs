@@ -158,6 +158,7 @@ function layout({ title, description, canonical, image, body, jsonld, ogType = "
 <link rel="stylesheet" href="/assets/fonts/vazirmatn.css">
 <style>${CSS}</style>
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
+<script type="speculationrules">{"prerender":[{"where":{"href_matches":"/articles/*"},"eagerness":"moderate"}],"prefetch":[{"where":{"href_matches":"/articles/*"},"eagerness":"conservative"}]}</script>
 </head>
 <body>
 <header class="top"><div class="wrap">

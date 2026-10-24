@@ -159,6 +159,7 @@
     transition: transform .2s ease, background-color .2s ease;
   }
   .nav-articles:hover, .nav-articles:focus-visible { background: rgba(255,255,255,.12); transform: translateY(-1px); outline: none; }
+  .nav-articles:active{transform:scale(.95)}
   @keyframes articlesGlow {
     0%, 100% { box-shadow: 0 0 8px rgba(255,255,255,.75), 0 0 20px rgba(190,225,255,.45), inset 0 0 10px rgba(255,255,255,.25); }
     50% { box-shadow: 0 0 14px rgba(255,255,255,.95), 0 0 34px rgba(190,225,255,.7), inset 0 0 14px rgba(255,255,255,.35); }
@@ -1430,6 +1431,12 @@
     }
   }
 </style>
+<!-- صفحهٔ مقالات از قبل بارگذاری می‌شود تا کلیک روی دکمهٔ «مقالات» فوری باز شود -->
+<link rel="prefetch" href="/articles/" as="document">
+<script type="speculationrules">
+{"prefetch":[{"urls":["/articles/"],"eagerness":"eager"}],
+ "prerender":[{"where":{"href_matches":"/articles/*"},"eagerness":"moderate"}]}
+</script>
 </head>
 <body>
 
