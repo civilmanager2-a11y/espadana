@@ -137,6 +137,34 @@
     100% { transform: translateX(-50%); }
   }
   .ticker-content:hover { animation-play-state: paused; }
+  a.ticker-label { text-decoration: none; cursor: pointer; transition: box-shadow .2s ease, filter .2s ease; }
+  a.ticker-label:hover, a.ticker-label:focus-visible { box-shadow: 0 0 14px rgba(255,184,0,.75); filter: brightness(1.08); outline: none; }
+
+  /* دکمهٔ سفید نئونی «مقالات» کنار لوگو */
+  .nav-brand { display: flex; align-items: center; gap: 14px; }
+  .nav-articles {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 18px;
+    border: 1.5px solid #fff;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    white-space: nowrap;
+    text-shadow: 0 0 6px rgba(255,255,255,.9), 0 0 14px rgba(190,225,255,.7);
+    box-shadow: 0 0 8px rgba(255,255,255,.75), 0 0 20px rgba(190,225,255,.45), inset 0 0 10px rgba(255,255,255,.25);
+    animation: articlesGlow 2.6s ease-in-out infinite;
+    transition: transform .2s ease, background-color .2s ease;
+  }
+  .nav-articles:hover, .nav-articles:focus-visible { background: rgba(255,255,255,.12); transform: translateY(-1px); outline: none; }
+  @keyframes articlesGlow {
+    0%, 100% { box-shadow: 0 0 8px rgba(255,255,255,.75), 0 0 20px rgba(190,225,255,.45), inset 0 0 10px rgba(255,255,255,.25); }
+    50% { box-shadow: 0 0 14px rgba(255,255,255,.95), 0 0 34px rgba(190,225,255,.7), inset 0 0 14px rgba(255,255,255,.35); }
+  }
+  @media (max-width: 480px) { .nav-brand { gap: 8px; } .nav-articles { padding: 5px 11px; font-size: 13px; } }
+  @media (prefers-reduced-motion: reduce) { .nav-articles { animation: none; } }
 
   /* NAV */
   nav {
@@ -1407,7 +1435,7 @@
 
 <!-- TICKER -->
 <div class="ticker-wrap" role="marquee" aria-label="اخبار مهم">
-  <span class="ticker-label">🔴 اخبار ویژه</span>
+  <a class="ticker-label" href="https://t.me/IranSolarNetwork" target="_blank" rel="noopener" title="کانال اخبار ویژه در تلگرام">🔴 اخبار ویژه</a>
   <span class="ticker-content">
     ⚡ طراحی مهندسی و اقتصادی متناسب با نیاز مصرف واقعی &nbsp;|&nbsp; برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ده سال سابقه درخشان &nbsp;|&nbsp; توان تولید روزانه یک مگاوات سازه خورشیدی سفارشی &nbsp;|&nbsp; ☀️ کار خاص مهندسی را از ما بخواهید &nbsp;|&nbsp; تماس: <a href="tel:09122504115">09122504115</a> &nbsp; <a href="tel:09122400138">09122400138</a> &nbsp; <a href="tel:02182809833">02182809833</a> &nbsp;|&nbsp; <a href="https://ble.ir/ESPADANACO" target="_blank">ble.ir/ESPADANACO</a> &nbsp;|&nbsp; 🌞 برای روزهای بی‌برقی تابستان ۱۴۰۵ آماده هستید؟ &nbsp;|&nbsp; بدون اشغال پشت‌بام برق مصرفی خود را تولید کنید، با امکان فروش به شبکه توزیع برق &nbsp;|&nbsp; ارسال سراسر کشور &nbsp;|&nbsp;
     ⚡ طراحی مهندسی و اقتصادی متناسب با نیاز مصرف واقعی &nbsp;|&nbsp; برترین تولیدکننده سازه مهندسی خورشیدی ایران با بیش از ده سال سابقه درخشان &nbsp;|&nbsp; توان تولید روزانه یک مگاوات سازه خورشیدی سفارشی &nbsp;|&nbsp; ☀️ کار خاص مهندسی را از ما بخواهید &nbsp;|&nbsp; تماس: <a href="tel:09122504115">09122504115</a> &nbsp; <a href="tel:09122400138">09122400138</a> &nbsp; <a href="tel:02182809833">02182809833</a> &nbsp;|&nbsp; <a href="https://ble.ir/ESPADANACO" target="_blank">ble.ir/ESPADANACO</a> &nbsp;|&nbsp; 🌞 برای روزهای بی‌برقی تابستان ۱۴۰۵ آماده هستید؟ &nbsp;|&nbsp; بدون اشغال پشت‌بام برق مصرفی خود را تولید کنید، با امکان فروش به شبکه توزیع برق &nbsp;|&nbsp; ارسال سراسر کشور &nbsp;|&nbsp;
@@ -1416,11 +1444,14 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
-    <div class="logo-wrap">
-      <img src="assets/logo.jpg" alt="اسپادانا" class="logo-img">
-    </div>
-  </a>
+  <div class="nav-brand">
+    <a href="#" class="nav-logo">
+      <div class="logo-wrap">
+        <img src="assets/logo.jpg" alt="اسپادانا" class="logo-img">
+      </div>
+    </a>
+    <a class="nav-articles" href="https://t.me/IranSolarNetwork" target="_blank" rel="noopener" title="مقالات در کانال تلگرام">مقالات</a>
+  </div>
   <ul class="nav-links">
     <li><a href="#why">چرا ما؟</a></li>
     <li><a href="#products">محصولات</a></li>
