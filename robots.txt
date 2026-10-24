@@ -8,3 +8,4 @@ Disallow: /shop/login
 Disallow: /shop/api/
 
 Sitemap: https://espadanagroup.com/shop/sitemap.xml
+Sitemap: https://espadanagroup.com/articles/sitemap.xml
