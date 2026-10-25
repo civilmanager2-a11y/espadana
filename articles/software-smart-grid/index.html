@@ -37,7 +37,7 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;h
 .top nav a:hover{color:var(--ink);background:var(--soft)}
 .top nav a.cta{background:var(--ink);color:#fff}
 .top nav a.cta:hover{background:var(--blue)}
-.hero{padding:72px 0 40px;border-bottom:1px solid var(--line)}
+.hero{padding:40px 0 40px;border-bottom:1px solid var(--line)}
 .hero h1{font-size:clamp(34px,6vw,68px);line-height:1.25;margin:14px 0 18px;font-weight:900;letter-spacing:-.01em}
 .hero h1 em{font-style:normal;color:var(--blue)}
 .hero p{max-width:720px;color:var(--muted);font-size:18px;margin:0}
@@ -92,8 +92,35 @@ figure.cover figcaption a{color:var(--blue)}
 footer.foot{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:13px}
 footer.foot .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer.foot a:hover{color:var(--blue)}
+/* رادیو شبکه خورشیدی ایران — دکمهٔ شیشه‌ای نقره‌ای‌آبی زیر «مشاوره» */
+.radio-strip{display:flex;justify-content:flex-end;padding-top:20px}
+.radio{display:flex;flex-direction:column;align-items:center;gap:7px}
+.radio-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;padding:6px 22px 6px 12px;border-radius:999px;
+  background:linear-gradient(135deg,rgba(248,251,255,.95) 0%,rgba(214,228,246,.85) 45%,rgba(176,203,236,.8) 100%);
+  border:1px solid rgba(255,255,255,.95);color:#0b3fd1;font-weight:800;font-size:15px;
+  box-shadow:0 10px 26px rgba(31,94,255,.18),0 2px 6px rgba(11,18,32,.08),inset 0 1px 0 #fff,inset 0 -8px 16px rgba(120,160,215,.25);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .2s,box-shadow .2s}
+.radio-btn::after{content:"";position:absolute;inset:-40% auto -40% -60%;width:40%;transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);animation:radioShine 4.2s ease-in-out infinite}
+.radio-btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(31,94,255,.26),0 2px 6px rgba(11,18,32,.08),inset 0 1px 0 #fff,inset 0 -8px 16px rgba(120,160,215,.3)}
+.radio-btn:active{transform:scale(.97)}
+.radio-btn svg{width:78px;height:58px;flex:none;filter:drop-shadow(0 3px 4px rgba(60,40,10,.25))}
+.radio-btn .live{display:inline-flex;align-items:center;gap:6px}
+.radio-btn .live i{width:8px;height:8px;border-radius:50%;background:#ff3b30;box-shadow:0 0 0 0 rgba(255,59,48,.6);animation:radioLive 1.6s infinite}
+.radio-cap{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.01em}
+.r-needle{animation:radioNeedle 3.6s ease-in-out infinite}
+.r-lamp{animation:radioLamp 1.9s ease-in-out infinite}
+.r-wave{opacity:0;animation:radioWave 2.4s ease-out infinite}
+.r-wave.w2{animation-delay:.8s}.r-wave.w3{animation-delay:1.6s}
+@keyframes radioNeedle{0%,100%{transform:translateX(0)}35%{transform:translateX(17px)}55%{transform:translateX(11px)}80%{transform:translateX(21px)}}
+@keyframes radioLamp{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes radioWave{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(1.4)}}
+@keyframes radioLive{0%{box-shadow:0 0 0 0 rgba(255,59,48,.6)}70%{box-shadow:0 0 0 7px rgba(255,59,48,0)}100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}}
+@keyframes radioShine{0%,60%{left:-60%}100%{left:130%}}
 @media (max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){
+  .radio-strip{justify-content:center;padding-top:14px}
+  .radio-btn{font-size:14px}
   .wrap{padding:0 16px}
   .grid{grid-template-columns:1fr}
   .top nav a:not(.cta){display:none}
@@ -104,7 +131,7 @@ footer.foot a:hover{color:var(--blue)}
   .post-body{font-size:16.5px}
   .band{padding:24px}
 }
-@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}.r-needle,.r-lamp,.r-wave,.radio-btn::after,.radio-btn .live i{animation:none}.r-wave{opacity:.6}}
 </style>
 
 <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/articles/*"},"eagerness":"moderate"}],"prefetch":[{"where":{"href_matches":"/articles/*"},"eagerness":"conservative"}]}</script>
@@ -114,6 +141,35 @@ footer.foot a:hover{color:var(--blue)}
   <a class="brand" href="/articles/" aria-label="مقالات اسپادانا"><img src="/assets/logo.jpg" alt="اسپادانا" width="120" height="40"><span>مقالات اسپادانا</span></a>
   <nav><a href="/">صفحهٔ اصلی</a><a href="/shop">فروشگاه</a><a href="https://t.me/IranSolarNetwork" target="_blank" rel="noopener">اخبار ویژه</a><a class="cta" href="/#contact">مشاوره</a></nav>
 </div></header>
+<div class="wrap radio-strip"><div class="radio">
+  <a class="radio-btn" href="https://t.me/IranSolarNetwork" target="_blank" rel="noopener" aria-label="رادیو شبکه خورشیدی ایران در تلگرام">
+    <svg viewBox="0 0 64 48" aria-hidden="true">
+  <defs>
+    <linearGradient id="rWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9783f"/><stop offset="1" stop-color="#6e3f1c"/></linearGradient>
+    <linearGradient id="rDial" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4d6"/><stop offset="1" stop-color="#f1d58e"/></linearGradient>
+    <radialGradient id="rGlow"><stop offset="0" stop-color="#ffd76a"/><stop offset=".55" stop-color="#ff9d2e" stop-opacity=".8"/><stop offset="1" stop-color="#ff7a00" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g fill="none" stroke="#1f5eff" stroke-width="1.6" stroke-linecap="round">
+    <path class="r-wave" d="M50 6a6 6 0 0 1 0 8" style="transform-origin:46px 10px"/>
+    <path class="r-wave w2" d="M53 3a10 10 0 0 1 0 14" style="transform-origin:46px 10px"/>
+    <path class="r-wave w3" d="M56 0a14 14 0 0 1 0 20" style="transform-origin:46px 10px"/>
+  </g>
+  <line x1="40" y1="14" x2="46" y2="4" stroke="#7a8597" stroke-width="1.4"/><circle cx="46" cy="4" r="1.6" fill="#c9d3e2"/>
+  <rect x="3" y="13" width="50" height="33" rx="9" fill="url(#rWood)"/>
+  <rect x="5" y="15" width="46" height="29" rx="7" fill="none" stroke="#e0a868" stroke-opacity=".5"/>
+  <rect x="8" y="18" width="40" height="11" rx="3" fill="url(#rDial)" stroke="#5b3416" stroke-width=".8"/>
+  <g stroke="#8a5a2b" stroke-width=".7"><path d="M12 20v3M16 20v2M20 20v3M24 20v2M28 20v3M32 20v2M36 20v3M40 20v2M44 20v3"/></g>
+  <rect class="r-needle" x="13" y="19" width="1.6" height="9" rx=".8" fill="#e0261b"/>
+  <circle class="r-lamp" cx="45" cy="25" r="6" fill="url(#rGlow)"/>
+  <circle cx="45" cy="25" r="1.6" fill="#fff1c2"/>
+  <g fill="#3b200c" opacity=".75"><rect x="9" y="32" width="24" height="1.6" rx=".8"/><rect x="9" y="35.5" width="24" height="1.6" rx=".8"/><rect x="9" y="39" width="24" height="1.6" rx=".8"/></g>
+  <circle cx="41" cy="37" r="4" fill="#d9c08a" stroke="#5b3416" stroke-width=".8"/><circle cx="41" cy="37" r="1.2" fill="#5b3416"/>
+  <rect x="9" y="45" width="6" height="2.5" rx="1" fill="#3b200c"/><rect x="41" y="45" width="6" height="2.5" rx="1" fill="#3b200c"/>
+</svg>
+    <span class="live"><i></i>رادیو خورشیدی</span>
+  </a>
+  <span class="radio-cap">اولین رادیو شبکه خورشیدی ایران</span>
+</div></div>
 <main>
 <section class="hero"><div class="wrap">
   <div class="crumbs"><a href="/articles/">مقالات</a> / نرم‌افزار، هوش مصنوعی و شبکهٔ هوشمند</div>
