@@ -152,10 +152,24 @@
     document.removeEventListener('click', enableSound);
     document.removeEventListener('keydown', enableSound);
   }
+  /* Fit the 1024×1820 poster into the screen, portrait or landscape.
+     In-app browsers (Telegram, Bale, Instagram) often report a 0×0 window while the page is opening and
+     send no resize afterwards, so the poster stayed unscaled until the phone was rotated. Now the size is
+     read from every source available and the fit is retried until the window has a real size. */
+  var scaleTries = 0;
+  function viewSize() {
+    var de = document.documentElement, vv = window.visualViewport;
+    var vw = de.clientWidth || window.innerWidth || (vv && vv.width) || screen.width || 0;
+    var vh = de.clientHeight || window.innerHeight || (vv && vv.height) || screen.height || 0;
+    return [vw, vh];
+  }
   function applyScale() {
-    var vw=document.documentElement.clientWidth||window.innerWidth||0;
-    var vh=document.documentElement.clientHeight||window.innerHeight||0;
-    if (vw<100||vh<100) return;
+    var size = viewSize(), vw = size[0], vh = size[1];
+    if (vw < 100 || vh < 100) {
+      if (scaleTries++ < 240) requestAnimationFrame(applyScale);
+      return;
+    }
+    scaleTries = 0;
     var scale=Math.min(vw/1024, vh/1820);
     var el=document.getElementById('posterScale');
     el.style.transformOrigin='top center';
@@ -164,13 +178,22 @@
     el.style.marginTop=Math.max(0,offsetY)+'px';
   }
 
+  /* size first (the canvas size is fixed), then keep it fitted on every resize / rotation */
+  applyScale();
+  ['resize', 'orientationchange', 'pageshow', 'load'].forEach(function (ev) {
+    window.addEventListener(ev, function () { applyScale(); setTimeout(applyScale, 250); });
+  });
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', applyScale);
+  if (window.ResizeObserver) new ResizeObserver(function () { applyScale(); }).observe(document.documentElement);
+  setTimeout(applyScale, 400);
+  setTimeout(applyScale, 1200);
+
   /* Load shared content then start everything */
   fetch('poster-content.html')
     .then(function(r){ return r.text(); })
     .then(function(html){
       document.getElementById('posterCanvas').innerHTML = html;
       applyScale();
-      window.addEventListener('resize', applyScale);
       document.addEventListener('click', enableSound);
       document.addEventListener('keydown', enableSound);
       tick();
