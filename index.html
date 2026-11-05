@@ -647,9 +647,6 @@
     0%, 100% { opacity: .55; }
     50%       { opacity: .9; }
   }
-  @media (max-width: 480px) {
-    .hero-poster-wrap { display: none; }
-  }
   .hero::before {
     content: '';
     position: absolute;
@@ -1516,6 +1513,18 @@
       font-weight: 900;
       box-shadow: 0 0 24px rgba(255,157,0,.42);
     }
+  }
+</style>
+<style id="mobile-hero-order">
+  /* موبایل: پوستر آویختهٔ جشنواره بالای بنرهای دیگر (فروشگاه، فروش ویژه) دیده شود.
+     بنر فروشگاه که در دسکتاپ absolute بالای هیرو است، در موبایل وارد جریان صفحه می‌شود تا زیر پوستر بیاید. */
+  @media (max-width: 768px) {
+    .hero { padding-top: 84px; row-gap: 28px; }
+    .hero-poster-wrap { order: -2; width: min(360px, 88vw); margin: 18px auto 0; }
+    .hero-shop-banner { order: -1; position: relative; top: auto; left: auto; transform: none; width: 92vw; max-width: 100%; }
+    .hero-shop-banner:hover, .hero-shop-banner:focus-visible { transform: translateY(-3px); }
+    .hero-content { order: 0; }
+    .hero-special-offer { order: 3; }
   }
 </style>
 <!-- صفحهٔ مقالات از قبل بارگذاری می‌شود تا کلیک روی دکمهٔ «مقالات» فوری باز شود -->
@@ -2773,6 +2782,8 @@ async function submitForm() {
       if (pin) pin.parentNode.removeChild(pin);
       scaleMini();
       window.addEventListener('resize', scaleMini);
+      window.addEventListener('orientationchange', function () { setTimeout(scaleMini, 250); });
+      if (window.ResizeObserver) new ResizeObserver(scaleMini).observe(document.getElementById('heroPosterCanvasWrap'));
     })
     .catch(function () { /* file server not running — silently skip */ });
 })();
