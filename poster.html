@@ -103,13 +103,10 @@
    To update offers: edit poster-content.html only.
    ═══════════════════════════════════════════════════════════ */
 (function () {
-  var DEADLINE_KEY = 'spadana_sale_deadline';
-  var deadline;
-  try { deadline = parseInt(localStorage.getItem(DEADLINE_KEY) || '', 10); } catch(e) {}
-  if (!deadline || isNaN(deadline)) {
-    deadline = new Date('2026-07-30T23:59:59').getTime();
-    try { localStorage.setItem(DEADLINE_KEY, String(deadline)); } catch(e) {}
-  }
+  // جشنوارهٔ ۹۰ روزه: ۱۴ آبان تا ۱۴ بهمن ۱۴۰۵ (پایان روز، به وقت تهران) — همان تاریخ صفحهٔ اول.
+  // تاریخ قبلاً در مرورگر بازدیدکننده ذخیره می‌شد و تاریخ منقضی‌شده می‌ماند؛ دیگر ذخیره نمی‌شود.
+  var deadline = new Date('2027-02-03T23:59:59+03:30').getTime();
+  try { localStorage.removeItem('spadana_sale_deadline'); } catch(e) {}
 
   var audioCtx = null, soundEnabled = false, lastSec = -1;
 

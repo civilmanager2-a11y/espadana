@@ -146,15 +146,15 @@
     .special-sale__title {
       position: absolute;
       z-index: 2;
-      top: -2.3cqw;
+      top: -4.7cqw;
       left: 50%;
-      width: 19.5%;
-      min-height: 3.3cqw;
+      width: 27%;
+      min-height: 5.6cqw;
       display: grid;
       place-items: center;
       transform: translateX(-50%);
       color: #fff;
-      font-size: 2.1cqw;
+      font-size: 3.4cqw;
       font-weight: 900;
       line-height: 1;
       text-shadow: 0 1px 2px #680000;
@@ -176,14 +176,16 @@
 
     .sale-row {
       display: grid;
-      grid-template-columns: 18.5% 40.5% 16% 25%;
-      height: 25%;
+      grid-template-columns: 13% 47% 40%;
+      height: calc(100% / 3);
       direction: rtl;
       border-bottom: .12cqw solid #cacaca;
       background: linear-gradient(90deg, #e1e1e1 0%, #fafafa 26%, #f2f2f2 72%, #e5e5e5 100%);
     }
 
     .sale-row:last-child { border-bottom: 0; }
+    .sale-row:first-child .sale-row__description { padding-top: 3.2cqw; }
+    .sale-row:first-child .sale-row__price { padding-top: .6cqw; }
 
     .sale-row > * {
       min-width: 0;
@@ -197,69 +199,71 @@
     .sale-row > *:last-child { border-left: 0; }
 
     .sale-row__photo {
-      background-image: url("./espadana-banner.png");
+      background-image: url("./assets/espadana-special-sale.png");
       background-repeat: no-repeat;
-      background-size: 540% auto;
-      background-position-x: 99%;
+      background-size: 144cqw auto;
+      background-position-x: -121.4cqw;
       box-shadow: inset 0 0 0 .65cqw #f4f4f4;
     }
 
-    .sale-row:nth-child(1) .sale-row__photo { background-position-y: 67.5%; }
-    .sale-row:nth-child(2) .sale-row__photo { background-position-y: 75.5%; }
-    .sale-row:nth-child(3) .sale-row__photo { background-position-y: 83.5%; }
-    .sale-row:nth-child(4) .sale-row__photo { background-position-y: 91.5%; }
+    .sale-row:nth-child(1) .sale-row__photo { background-position-y: -108.0cqw; }
+    .sale-row:nth-child(2) .sale-row__photo { background-position-y: -132.3cqw; }
+    .sale-row:nth-child(3) .sale-row__photo { background-position-y: -120.2cqw; }
 
     .sale-row__description {
       position: relative;
       flex-direction: column;
-      gap: .35cqw;
-      padding: .6cqw 1.8cqw .5cqw 1cqw;
-      font-size: 1.35cqw;
+      gap: .5cqw;
+      padding: .4cqw 3cqw .4cqw 1cqw;
+      font-size: 2.2cqw;
       font-weight: 900;
-      line-height: 1.45;
+      line-height: 1.2;
     }
 
     .sale-row__description::before {
       content: "";
       position: absolute;
-      right: .75cqw;
-      width: .95cqw;
-      height: .95cqw;
+      right: 1cqw;
+      width: 1.3cqw;
+      height: 1.3cqw;
       border-radius: 50%;
       background: linear-gradient(135deg, #e0bc54, #aa7906);
     }
 
     .sale-row__description em {
       color: #a00000;
-      font-size: 1.3cqw;
+      font-size: 2.1cqw;
       font-style: normal;
       font-weight: 900;
     }
 
-    .sale-row__weight,
     .sale-row__price {
       flex-direction: column;
+      gap: .1cqw;
       font-weight: 900;
       line-height: 1.05;
     }
 
-    .sale-row__weight small,
-    .sale-row__price small {
-      margin-bottom: .35cqw;
-      font-size: 1.15cqw;
+    .sale-row__weight {
+      position: relative;
+      z-index: 1;
+      font-size: 2.3cqw;
+      font-weight: 900;
+      color: #1d1300;
+    }
+
+    .sale-row__weight b {
+      margin: 0 .5cqw;
+      font-size: 3.4cqw;
       font-weight: 900;
     }
 
-    .sale-row__weight strong {
-      font-size: 2.5cqw;
-      font-weight: 900;
-    }
-
-    .sale-row__weight span,
     .sale-row__price span {
-      margin-top: .2cqw;
-      font-size: 1.15cqw;
+      position: relative;
+      z-index: 1;
+      font-size: 2.1cqw;
       font-weight: 900;
+      color: #1d1300;
     }
 
     .sale-row__price {
@@ -274,11 +278,9 @@
 
     .sale-row:nth-child(2) .sale-row__price { animation-delay: .25s; }
     .sale-row:nth-child(3) .sale-row__price { animation-delay: .5s; }
-    .sale-row:nth-child(4) .sale-row__price { animation-delay: .75s; }
 
     .sale-row:nth-child(2) .sale-row__price::after { animation-delay: .3s; }
     .sale-row:nth-child(3) .sale-row__price::after { animation-delay: .6s; }
-    .sale-row:nth-child(4) .sale-row__price::after { animation-delay: .9s; }
 
     .sale-row__price strong {
       position: relative;
@@ -286,7 +288,7 @@
       color: #ae0808;
       direction: ltr;
       font-family: "Arial Black", Tahoma, Arial, sans-serif;
-      font-size: 2.7cqw;
+      font-size: 4.3cqw;
       font-weight: 950;
       line-height: .95;
       letter-spacing: -.12cqw;
@@ -385,41 +387,40 @@
         <article class="sale-row">
           <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با پایه کوبشی"></div>
           <div class="sale-row__description">
-            <span>استراکچر نیروگاهی خورشیدی تیپ بایفشیال (رفتـری)</span>
+            <span>استراکچر نیروگاهی خورشیدی<br>تیپ بایفشیال (رفتـری)</span>
             <em>گالوانیزه گرم HDG با پایه کوبشی</em>
           </div>
-          <div class="sale-row__weight"><small>هر مگاوات</small><strong>39</strong><span>تن</span></div>
-          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>8,950,000,000</strong><span>تومان</span></div>
+          <div class="sale-row__price">
+            <div class="sale-row__weight">هر مگاوات<b>39</b>تن</div>
+            <strong>10,920,000,000</strong>
+            <span>تومان — قیمت هر مگاوات</span>
+          </div>
         </article>
 
         <article class="sale-row">
-          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی بدون پایه کوبشی"></div>
+          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با فونداسیون وزنی"></div>
           <div class="sale-row__description">
-            <span>استراکچر نیروگاهی خورشیدی تیپ بایفشیال (رفتـری)</span>
-            <em>گالوانیزه گرم HDG بدون پایه کوبشی</em>
+            <span>استراکچر نیروگاهی خورشیدی<br>تیپ بایفشیال (رفتـری)</span>
+            <em>گالوانیزه گرم HDG ( فونداسیون وزنی )</em>
           </div>
-          <div class="sale-row__weight"><small>هر مگاوات</small><strong>28.5</strong><span>تن</span></div>
-          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>6,550,000,000</strong><span>تومان</span></div>
+          <div class="sale-row__price">
+            <div class="sale-row__weight">هر مگاوات<b>28.5</b>تن</div>
+            <strong>7,950,000,000</strong>
+            <span>تومان — قیمت هر مگاوات</span>
+          </div>
         </article>
 
         <article class="sale-row">
-          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با سیستم دفنی بتنی"></div>
+          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با سیستم دفنی بتنی اوگر"></div>
           <div class="sale-row__description">
-            <span>استراکچر خورشیدی نیروگاهی تیپ بایفشیال (رفتـری)</span>
-            <em>گالوانیزه گرم HDG سیستم دفنی بتنی</em>
+            <span>استراکچر خورشیدی نیروگاهی<br>تیپ بایفشیال (رفتـری)</span>
+            <em>گالوانیزه گرم HDG سیستم دفنی بتنی ( اوگر )</em>
           </div>
-          <div class="sale-row__weight"><small>هر مگاوات</small><strong>30</strong><span>تن</span></div>
-          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>7,350,000,000</strong><span>تومان</span></div>
-        </article>
-
-        <article class="sale-row">
-          <div class="sale-row__photo" role="img" aria-label="استراکچر خورشیدی با گالوانیزه فابریک"></div>
-          <div class="sale-row__description">
-            <span>استراکچر خورشیدی نیروگاهی تیپ بایفشیال (رفتـری)</span>
-            <em>گالوانیزه فابریک کارخانه Z200 سیستم دفنی بتنی</em>
+          <div class="sale-row__price">
+            <div class="sale-row__weight">هر مگاوات<b>30</b>تن</div>
+            <strong>8,400,000,000</strong>
+            <span>تومان — قیمت هر مگاوات</span>
           </div>
-          <div class="sale-row__weight"><small>هر مگاوات</small><strong>30</strong><span>تن</span></div>
-          <div class="sale-row__price"><small>قیمت هر مگاوات</small><strong>6,850,000,000</strong><span>تومان</span></div>
         </article>
       </div>
     </section>
