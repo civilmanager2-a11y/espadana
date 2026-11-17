@@ -1,0 +1,29 @@
+{
+  "slug": "pvcase-concept-cloud-solar-software",
+  "category": "software-smart-grid",
+  "date": "۲۶ آبان ۱۴۰۵",
+  "iso": "2026-11-17",
+  "image": "structure-diagram",
+  "title": "رونمایی پی‌وی کیس از نرم‌افزار ابری امکان‌سنجی اولیه نیروگاه خورشیدی",
+  "summary": "شرکت پی‌وی کیس از پلاتفرم ابری جدید PVcase Concept برای امکان‌سنجی سریع و تصمیم‌گیری درباره پروژه‌های مقیاس بزرگ خورشیدی رونمایی کرد.",
+  "body": [
+    "پلاتفرم ابری جدید PVcase Concept به منظور پر کردن فاصله میان مرحله انتخاب اولیه زمین و مهندسی تفصیلی نیروگاه‌های خورشیدی طراحی شده است. این نرم‌افزار به توسعه‌دهندگان اجازه می‌دهد داده‌های جغرافیایی، ضوابط محلی و معیارهای مالی را پیش از صرف هزینه‌های سنگین تحلیل کنند.",
+    "به گفته مدیران این شرکت، ابزار جدید با تجمیع اطلاعات مربوط به قوانین محلی، شرایط زمین و برآورد تولید انرژی، به تیم‌های توسعه کمک می‌کند تا تصمیمات قطعی درباره توجیه‌پذیری پروژه‌ها را با سرعت و دقت بیشتری اتخاذ کنند."
+  ],
+  "insight": "این ابزار ابری پیشرفته، فرصتی ارزشمند برای مهندسان و مشاوران انرژی خورشیدی ایجاد می‌کند تا با ارائه خدمات ارزیابی و امکان‌سنجی سریع، دقت و سرعت اجرای پروژه‌های سرمایه‌گذاران را افزایش دهند.",
+  "sources": [
+    {
+      "title": "pv magazine USA — PVcase launches early-stage feasibility and design software at RE+ 2026 - pv magazine USA",
+      "url": "https://pv-magazine-usa.com/2026/11/16/pvcase-launches-early-stage-feasibility-and-design-software-at-re-2026/"
+    }
+  ],
+  "podcast": {
+    "date": "2026-11-17",
+    "slot": "morning",
+    "episode_title": "محدودیت خودکار برق چاه‌ها، طراحی ابری نیروگاه و ذخیره‌سازهای سیار خورشیدی"
+  },
+  "refImage": {
+    "credit": "pv magazine USA",
+    "page": "https://pv-magazine-usa.com/2026/11/16/pvcase-launches-early-stage-feasibility-and-design-software-at-re-2026/"
+  }
+}

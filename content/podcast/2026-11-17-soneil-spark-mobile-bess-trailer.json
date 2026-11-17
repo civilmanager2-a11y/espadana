@@ -1,0 +1,29 @@
+{
+  "slug": "soneil-spark-mobile-bess-trailer",
+  "category": "energy-storage",
+  "date": "۲۶ آبان ۱۴۰۵",
+  "iso": "2026-11-17",
+  "image": "zinexx-scene",
+  "title": "معرفی سیستم ذخیره‌ساز باتری سیار تریلر توسط سانیل اسپارک",
+  "summary": "شرکت سانیل اسپارک سیستم ذخیره‌ساز انرژی باتری قابل حمل را روی شاسی تریلر برای تأمین برق موقت و منفصل از شبکه معرفی کرد.",
+  "body": [
+    "سیستم جدید Mobile BESS شرکت سانیل اسپارک به صورت ماژولار روی یک تریلر یدک‌کش نصب شده و برای ارائه برق پشتیبان موقت در کارگاه‌های ساختمانی، رویدادها و مناطق دورافتاده کاربرد دارد. این سامانه قابلیت شارژ از شبکه، ژنراتور یا پنل‌های خورشیدی را داراست.",
+    "این تجهیزات به سیستم تعلیق بادی مستقل، عملکرد در شرایط سخت آب‌وهوایی از منفی بیست تا مثبت پنجاه درجه سانتی‌گراد و سیستم خودکار ایمنی و مجهز به نظارت برخط از راه دور مجهز شده‌اند تا جایگزینی پاک برای ژنراتورهای دیزلی باشند."
+  ],
+  "insight": "توسعه سامانه‌های ذخیره‌ساز سیار، بستر مناسبی برای شکل‌گیری کسب‌وکارهای جدید در زمینه اجاره تجهیزات تامین برق پاک و اضطراب‌زدایی از پروژه‌های عمرانی، فیلم‌برداری و رویدادهای فضای باز فراهم می‌کند.",
+  "sources": [
+    {
+      "title": "Solar Power World — Soneil Spark introduces its Mobile Battery Energy Storage System",
+      "url": "https://www.solarpowerworldonline.com/2026/11/soneil-spark-introduces-its-mobile-battery-energy-storage-system/"
+    }
+  ],
+  "podcast": {
+    "date": "2026-11-17",
+    "slot": "morning",
+    "episode_title": "محدودیت خودکار برق چاه‌ها، طراحی ابری نیروگاه و ذخیره‌سازهای سیار خورشیدی"
+  },
+  "refImage": {
+    "credit": "Solar Power World",
+    "page": "https://www.solarpowerworldonline.com/2026/11/soneil-spark-introduces-its-mobile-battery-energy-storage-system/"
+  }
+}
