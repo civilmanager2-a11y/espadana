@@ -20,6 +20,14 @@
     {
       "source": "/shop/:path*",
       "destination": "https://espadana-shop.vercel.app/shop/:path*"
+    },
+    {
+      "source": "/finance",
+      "destination": "https://espadana-finance.vercel.app/finance"
+    },
+    {
+      "source": "/finance/:path*",
+      "destination": "https://espadana-finance.vercel.app/finance/:path*"
     }
   ],
   "headers": [
